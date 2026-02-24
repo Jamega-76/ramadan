@@ -38,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* ── BACKGROUND ── */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -49,7 +48,6 @@
         linear-gradient(175deg, #0d2233 0%, #08151f 55%, #0a1e2a 100%);
     }
 
-    /* geometric corner ornaments via SVG background */
     body::after {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -58,7 +56,6 @@
       pointer-events: none;
     }
 
-    /* ── PAGES ── */
     .page {
       position: fixed; inset: 0; z-index: 10;
       overflow-y: auto;
@@ -70,14 +67,10 @@
       transform: translateY(30px);
     }
 
-    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
 
-    /* ════════════════════════════════════════
-       HOME PAGE
-    ════════════════════════════════════════ */
     #home {
       display: flex;
       flex-direction: column;
@@ -86,7 +79,6 @@
       padding: 0 0 40px;
     }
 
-    /* ── HEADER ── */
     .header {
       width: 100%;
       text-align: center;
@@ -147,7 +139,6 @@
       opacity: 0.85;
     }
 
-    /* ── TODAY CARD ── */
     .today-card {
       margin: 0 20px 24px;
       background: linear-gradient(135deg, rgba(15,107,107,0.4) 0%, rgba(26,158,143,0.25) 100%);
@@ -234,7 +225,6 @@
       100% { background-position: 200% 0; }
     }
 
-    /* ── CALENDAR ── */
     .calendar-wrap {
       width: calc(100% - 40px);
       max-width: 460px;
@@ -357,10 +347,8 @@
 
     .cal-cell.today .cell-num { color: var(--gold-light); }
     .cal-cell.today .cell-ramadan { color: var(--gold); }
-
     .cal-cell.past .cell-num { color: var(--text); }
 
-    /* dot indicator for past */
     .cal-cell.past::after {
       content: '';
       position: absolute;
@@ -371,7 +359,6 @@
       opacity: 0.7;
     }
 
-    /* ── FOOTER VERSE ── */
     .footer-verse {
       margin: 28px 20px 0;
       width: calc(100% - 40px);
@@ -397,9 +384,6 @@
       line-height: 1.6;
     }
 
-    /* ════════════════════════════════════════
-       DETAIL PAGE
-    ════════════════════════════════════════ */
     #detail {
       display: flex;
       flex-direction: column;
@@ -491,7 +475,6 @@
       text-transform: uppercase;
     }
 
-    /* ornament separator */
     .sep {
       display: flex;
       align-items: center;
@@ -514,7 +497,6 @@
       transform: rotate(45deg);
     }
 
-    /* ── CONTENT BLOCKS ── */
     .content-area {
       padding: 0 24px;
       max-width: 560px;
@@ -565,7 +547,6 @@
       font-weight: 300;
     }
 
-    /* ── VERSE HIGHLIGHT ── */
     .verse-card {
       background: linear-gradient(135deg, rgba(15,107,107,0.3), rgba(201,168,76,0.1));
       border: 1px solid rgba(201,168,76,0.3);
@@ -599,7 +580,6 @@
       margin-top: 12px;
     }
 
-    /* ── LESSONS ── */
     .lessons-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -626,7 +606,6 @@
       line-height: 1.4;
     }
 
-    /* ── NAVIGATION BOTTOM ── */
     .detail-nav {
       display: flex;
       align-items: center;
@@ -664,7 +643,6 @@
       pointer-events: none;
     }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -680,7 +658,6 @@
 </head>
 <body>
 
-<!-- ══════════════ HOME PAGE ══════════════ -->
 <div class="page" id="home">
   <div class="header anim anim-1">
     <div class="header-ornament">
@@ -732,7 +709,6 @@
   </div>
 </div>
 
-<!-- ══════════════ DETAIL PAGE ══════════════ -->
 <div class="page hidden" id="detail">
   <div class="detail-header">
     <button class="back-btn" id="backBtn" onclick="goHome()">←</button>
@@ -783,9 +759,7 @@
 </div>
 
 <script>
-// ════════════════════════════════════════
 // DATA: 30 Surahs for 30 days
-// ════════════════════════════════════════
 const SURAHS = [
   {
     num: 1, name: "Al-Fatiha", arabic: "الفاتحة", meaning: "L'Ouverture",
@@ -889,7 +863,7 @@ const SURAHS = [
   {
     num: 12, name: "Yusuf", arabic: "يوسف", meaning: "Joseph",
     meta: "Mecquoise · 111 versets · La plus belle des histoires",
-    verse: { ar: "إِنَّهُۥ مَن يَتَّقِ وَيَصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ", fr: "« Celui qui craint Allah et qui endure — Allah ne laisse pas perdre la récompense des bienfaisants »", ref: "Yusuf : 90" },
+    verse: { ar: "إِنَّهُۥ mَن يَتَّقِ وَيَصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ", fr: "« Celui qui craint Allah et qui endure — Allah ne laisse pas perdre la récompense des bienfaisants »", ref: "Yusuf : 90" },
     context: "Allah la nomme Lui-même 'la plus belle des histoires'. L'histoire de Yusuf (Joseph) — vendu comme esclave par ses frères, tenté, emprisonné, puis élevé au rang de ministre d'Égypte — est un chef-d'œuvre de résilience divine.",
     themes: "La patience (Sabr) face à la trahison, la chasteté face à la tentation, le pardon face à l'injustice. Yusuf ne se venge jamais de ses frères. Sa vie illustre que chaque épreuve est en réalité un escalier vers les sommets.",
     lessons: [{ icon: "💎", text: "Patience transformatrice" }, { icon: "🕊️", text: "Pardon sans condition" }, { icon: "🌟", text: "Chaque épreuve est un escalier" }, { icon: "🛡️", text: "Chasteté comme force" }],
@@ -943,7 +917,7 @@ const SURAHS = [
   {
     num: 18, name: "Al-Kahf", arabic: "الكهف", meaning: "La Caverne",
     meta: "Mecquoise · 110 versets · Réciter le vendredi",
-    verse: { ar: "وَلَا تَقُولَنَّ لِشَاىۡءٍ إِنِّي فَاعِلٞ ذَٰلِكَ غَدًا إِلَّآ أَن يَشَآءَ ٱللَّهُ", fr: "« Ne dis jamais de quoi que ce soit : Je le ferai demain, sauf si Allah le veut »", ref: "Al-Kahf : 23-24" },
+    verse: { ar: "وَلَا تَقُولَنَّ lِشَاىۡءٍ إِنِّي فَاعِلٞ ذَٰلِكَ غَدًا إِلَّآ أَن يَشَآءَ ٱللَّهُ", fr: "« Ne dis jamais de quoi que ce soit : Je le ferai demain, sauf si Allah le veut »", ref: "Al-Kahf : 23-24" },
     context: "Recommandée à réciter chaque vendredi, Al-Kahf contient quatre histoires symboliques : les Gens de la Caverne (foi contre tyrannie), le Jardinier (orgueil), Moussa et Al-Khidr (sagesse cachée), et Dhou Al-Qarnayn (juste gouvernance).",
     themes: "Protection contre le Dajjal (Antéchrist), les quatre fitnats (épreuves) de la foi, la richesse, la connaissance et le pouvoir. Al-Khidr enseigne à Moussa que la sagesse divine dépasse l'intelligence humaine.",
     lessons: [{ icon: "🏔️", text: "Foi contre la tyrannie" }, { icon: "💡", text: "Sagesse cachée d'Al-Khidr" }, { icon: "🌺", text: "Cette vie est éphémère" }, { icon: "📅", text: "Dire toujours Insha'Allah" }],
@@ -970,7 +944,7 @@ const SURAHS = [
   {
     num: 21, name: "Al-Anbiya", arabic: "الأنبياء", meaning: "Les Prophètes",
     meta: "Mecquoise · 112 versets",
-    verse: { ar: "وَمَآ أَرۡسَلۡنَٰكَ إِلَّا رَحۡمَةٗ لِّلۡعَٰلَمِينَ", fr: "« Nous ne t'avons envoyé qu'en tant que miséricorde pour les univers »", ref: "Al-Anbiya : 107" },
+    verse: { ar: "وَمَآ أَرۡسَلۡنَٰكَ إِلَّا رَحۡمَةٗ lِّلۡعَٰلَمِينَ", fr: "« Nous ne t'avons envoyé qu'en tant que miséricorde pour les univers »", ref: "Al-Anbiya : 107" },
     context: "La sourate des Prophètes défile dix-huit prophètes en un seul texte poétique : Ibrahim, Lut, Nuh, Dawud, Sulayman, Ayyub, Yunus, Zakariya, Yahya, Maryam, et l'annonce du Prophète Muhammad ﷺ comme miséricorde universelle.",
     themes: "L'unicité du message prophétique à travers les âges, la fraternité des prophètes, la miséricorde comme essence de l'islam, et la dou'a d'Ayyub (Job) dans l'épreuve : 'Rabb anni massaniya al-durru wa anta arhamu al-rahimin.'",
     lessons: [{ icon: "🕊️", text: "Le Prophète ﷺ, miséricorde" }, { icon: "🌍", text: "Message universel" }, { icon: "🤝", text: "Fraternité des prophètes" }, { icon: "💪", text: "Patience d'Ayyub" }],
@@ -1006,7 +980,7 @@ const SURAHS = [
   {
     num: 25, name: "Al-Furqan", arabic: "الفرقان", meaning: "Le Critère",
     meta: "Mecquoise · 77 versets",
-    verse: { ar: "وَعِبَادُ ٱلرَّحۡمَٰنِ ٱلَّذِينَ يَمۡشُونَ عَلَى ٱلۡأَرۡضِ هَوۡنٗا", fr: "« Les serviteurs du Tout-Miséricordieux sont ceux qui marchent humblement sur la terre »", ref: "Al-Furqan : 63" },
+    verse: { ar: "وَعِبَادُ ٱلرَّحۡmَٰنِ ٱلَّذِينَ يَمۡشُونَ عَلَى ٱلۡأَرۡضِ هَوۡنٗا", fr: "« Les serviteurs du Tout-Miséricordieux sont ceux qui marchent humblement sur la terre »", ref: "Al-Furqan : 63" },
     context: "Al-Furqan (le Critère) est un nom du Coran car il distingue le vrai du faux, le bien du mal. La sourate décrit avec poésie les caractéristiques des 'Ibad Ar-Rahman (serviteurs du Miséricordieux) — un idéal de vie islamique.",
     themes: "Les 10 qualités des serviteurs du Miséricordieux : humilité dans la démarche, paix face à l'ignorance, dévotion nocturne, crainte de l'Enfer, juste dépense, chasteté, honnêteté, et constance dans la prière.",
     lessons: [{ icon: "🚶", text: "Marcher avec humilité" }, { icon: "🌙", text: "Veille nocturne (Qiyam)" }, { icon: "☮️", text: "Saluer l'ignorant" }, { icon: "⚖️", text: "Équilibre dans la dépense" }],
@@ -1017,7 +991,7 @@ const SURAHS = [
     meta: "Mecquoise · 227 versets",
     verse: { ar: "وَتَوَكَّلۡ عَلَى ٱلۡعَزِيزِ ٱلرَّحِيمِ", fr: "« Et place ta confiance en le Puissant, le Miséricordieux »", ref: "Ash-Shu'ara : 217" },
     context: "La deuxième plus longue sourate mecquoise, elle défile les histoires de Moussa, Ibrahim, Nuh, Hud, Salih, Lut et Shu'ayb avec un refrain répété : 'Inna fi dhalika la-ayatan wa ma kana aktharuhum mu'minin.' La vraie poésie est celle du Coran.",
-    themes: "La puissance du verbe divin vs les illusions des poètes, la Tawakkul (confiance totale en Allah), et la constance des prophètes face au rejet de leurs peuples. Chaque histoire se termine par le même constat : peu croient.",
+    themes: "La puissance du verbe divin vs les illusions des poètes, la Tawakkul (confiance totale en Allah), et la constance des prophètes face au rejet de leurs peuples. Chaque story se termine par le même constat : peu croient.",
     lessons: [{ icon: "✍️", text: "Le Coran, poésie divine" }, { icon: "🛡️", text: "Tawakkul : confiance en Allah" }, { icon: "🔄", text: "Histoires des prophètes" }, { icon: "💎", text: "Constance dans la da'wa" }],
     reflection: "La Tawakkul n'est pas passivité — c'est agir de son mieux, puis confier le résultat à Allah. Y a-t-il une situation dans votre vie où vous devez lâcher prise et faire confiance à Allah ?"
   },
@@ -1059,10 +1033,8 @@ const SURAHS = [
   }
 ];
 
-// ════════════════════════════════════════
-// RAMADAN 2026: starts February 18, 2026
-// ════════════════════════════════════════
-const RAMADAN_START = new Date(2026, 1, 18); // Feb 18 2026 (month is 0-indexed)
+// RAMADAN 2026: starts February 19, 2026
+const RAMADAN_START = new Date(2026, 1, 19); // Changement effectué ici
 const RAMADAN_DAYS = 30;
 
 function getRamadanDay(date) {
@@ -1086,9 +1058,6 @@ today.setHours(0,0,0,0);
 const todayRamadan = getRamadanDay(today);
 let currentDetailDay = null;
 
-// ────────────────────────────────────────
-// Today card
-// ────────────────────────────────────────
 function updateTodayCard() {
   const dayNum = document.getElementById('todayNum');
   const dayDate = document.getElementById('todayDate');
@@ -1113,7 +1082,7 @@ function updateTodayCard() {
       dayNum.textContent = diff;
       dayDate.textContent = 'jours avant Ramadan';
       sNum.textContent = 'À partir du';
-      sName.textContent = '18 Fév 2026';
+      sName.textContent = '19 Fév 2026'; // Mise à jour de la date affichée
       sAr.textContent = '١٤٤٧ هـ';
     } else {
       dayNum.textContent = '—';
@@ -1125,23 +1094,16 @@ function updateTodayCard() {
   }
 }
 
-// ────────────────────────────────────────
-// Calendar
-// ────────────────────────────────────────
 function buildCalendar() {
   const grid = document.getElementById('calGrid');
   const monthTitle = document.getElementById('calMonthTitle');
   grid.innerHTML = '';
 
-  // We need to show Feb & March 2026 (Ramadan spans both)
-  // Let's build a unified view of all 30 days
-  // Start: Feb 18. Day of week for Feb 18, 2026 (Wednesday = index 3, Mon=0)
   const startDate = new Date(RAMADAN_START);
-  const startDow = (startDate.getDay() + 6) % 7; // Monday-based
+  const startDow = (startDate.getDay() + 6) % 7; 
 
   monthTitle.textContent = 'Fév — Mar 2026';
 
-  // Fill empty cells before day 1
   for (let i = 0; i < startDow; i++) {
     const cell = document.createElement('div');
     cell.className = 'cal-cell empty';
@@ -1174,9 +1136,6 @@ function buildCalendar() {
   }
 }
 
-// ────────────────────────────────────────
-// Detail page
-// ────────────────────────────────────────
 function openDetail(day) {
   currentDetailDay = day;
   const s = SURAHS[day - 1];
@@ -1194,7 +1153,6 @@ function openDetail(day) {
   document.getElementById('detailThemes').textContent = s.themes;
   document.getElementById('detailReflection').textContent = s.reflection;
 
-  // Lessons grid
   const grid = document.getElementById('lessonsGrid');
   grid.innerHTML = s.lessons.map(l => `
     <div class="lesson-pill">
@@ -1203,7 +1161,6 @@ function openDetail(day) {
     </div>
   `).join('');
 
-  // Prev/Next
   const prevDayDate = day > 1 ? getDateForRamadanDay(day - 1) : null;
   const nextDayDate = day < RAMADAN_DAYS ? getDateForRamadanDay(day + 1) : null;
   document.getElementById('prevBtn').classList.toggle('disabled', !prevDayDate || prevDayDate > today);
@@ -1214,10 +1171,9 @@ function openDetail(day) {
   det.classList.remove('hidden');
   det.scrollTop = 0;
 
-  // Re-trigger animations
   det.querySelectorAll('.anim').forEach(el => {
     el.style.animation = 'none';
-    el.offsetHeight; // reflow
+    el.offsetHeight; 
     el.style.animation = '';
   });
 }
@@ -1236,9 +1192,6 @@ function navigateDay(dir) {
   openDetail(next);
 }
 
-// ────────────────────────────────────────
-// INIT
-// ────────────────────────────────────────
 updateTodayCard();
 buildCalendar();
 </script>
