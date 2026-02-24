@@ -48,1152 +48,192 @@
         linear-gradient(175deg, #0d2233 0%, #08151f 55%, #0a1e2a 100%);
     }
 
-    body::after {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.15'%3E%3Cpolygon points='30,2 58,15 58,45 30,58 2,45 2,15'/%3E%3Cpolygon points='30,8 52,19 52,41 30,52 8,41 8,19'/%3E%3C/g%3E%3C/svg%3E");
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
+    /* Pages et structure */
     .page {
       position: fixed; inset: 0; z-index: 10;
       overflow-y: auto;
       transition: transform 0.5s cubic-bezier(0.77,0,0.18,1), opacity 0.5s ease;
     }
-    .page.hidden {
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(30px);
-    }
+    .page.hidden { pointer-events: none; opacity: 0; transform: translateY(30px); }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+    #home { display: flex; flex-direction: column; align-items: center; min-height: 100%; padding: 0 0 40px; }
 
-    #home {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100%;
-      padding: 0 0 40px;
-    }
+    /* Header */
+    .header { width: 100%; text-align: center; padding: 48px 24px 28px; position: relative; }
+    .header-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 6vw, 2.4rem); background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-pale)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+    .header-sub { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.35em; color: var(--teal-light); text-transform: uppercase; }
 
-    .header {
-      width: 100%;
-      text-align: center;
-      padding: 48px 24px 28px;
-      position: relative;
-    }
-
-    .header-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .ornament-line {
-      flex: 1;
-      max-width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .crescent {
-      font-size: 22px;
-      color: var(--gold);
-      filter: drop-shadow(0 0 8px var(--gold));
-    }
-
-    .header-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.6rem, 6vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-pale) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-
-    .header-sub {
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.35em;
-      color: var(--teal-light);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .arabic-title {
-      font-family: 'Amiri', serif;
-      font-size: clamp(1.4rem, 5vw, 2rem);
-      color: var(--gold-pale);
-      letter-spacing: 0.05em;
-      margin-top: 10px;
-      opacity: 0.85;
-    }
-
-    .today-card {
-      margin: 0 20px 24px;
+    /* Cards */
+    .today-card, .time-card {
+      margin: 0 20px 16px;
       background: linear-gradient(135deg, rgba(15,107,107,0.4) 0%, rgba(26,158,143,0.25) 100%);
       border: 1px solid rgba(201,168,76,0.35);
       border-radius: 20px;
       padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: calc(100% - 40px);
       max-width: 460px;
-      box-shadow: 0 0 30px rgba(15,107,107,0.2), inset 0 0 20px rgba(201,168,76,0.05);
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 0 30px rgba(15,107,107,0.2);
     }
 
-    .today-card::before {
-      content: '';
-      position: absolute;
-      top: -1px; left: 20px; right: 20px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .today-left .label {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--teal-light);
-      margin-bottom: 4px;
-    }
-
-    .today-left .day-num {
-      font-family: 'Cinzel', serif;
-      font-size: 1.9rem;
-      font-weight: 600;
-      color: var(--gold-light);
-      line-height: 1;
-    }
-
-    .today-left .day-name {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    .today-right {
-      text-align: right;
-    }
-
-    .today-right .surah-num {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      color: var(--teal-light);
-      text-transform: uppercase;
-      margin-bottom: 3px;
-    }
-
-    .today-right .surah-name {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      color: var(--gold-pale);
-    }
-
-    .today-right .surah-arabic {
-      font-family: 'Amiri', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-top: 3px;
-    }
-
-    .today-cta {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
-      animation: shimmer 3s linear infinite;
-      background-size: 200% 100%;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    .calendar-wrap {
-      width: calc(100% - 40px);
-      max-width: 460px;
-      margin: 0 20px;
-    }
-
-    .cal-month-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      padding: 0 4px;
-    }
-
-    .cal-month-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
-
-    .cal-month-badge {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .cal-days-header {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      margin-bottom: 6px;
-    }
-
-    .cal-day-label {
-      text-align: center;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      padding: 4px 0;
-    }
-
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-    }
-
-    .cal-cell {
-      aspect-ratio: 1;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-      font-weight: 400;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      border: 1px solid transparent;
-      position: relative;
-      background: var(--surface);
-      user-select: none;
-    }
-
-    .cal-cell.empty {
-      background: transparent;
-      border: none;
-      pointer-events: none;
-    }
-
-    .cal-cell.future {
-      opacity: 0.35;
-      pointer-events: none;
-    }
-
-    .cal-cell.past, .cal-cell.today {
-      cursor: pointer;
-    }
-
-    .cal-cell.past:hover, .cal-cell.today:hover {
-      background: var(--surface-hover);
-      border-color: rgba(201,168,76,0.3);
-      transform: scale(1.06);
-    }
-
-    .cal-cell.past {
-      background: rgba(15,107,107,0.2);
-      border-color: rgba(15,107,107,0.3);
-    }
-
-    .cal-cell.today {
-      background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(15,107,107,0.3));
-      border-color: var(--gold);
-      box-shadow: 0 0 16px rgba(201,168,76,0.35);
-      animation: pulse-gold 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-gold {
-      0%, 100% { box-shadow: 0 0 16px rgba(201,168,76,0.35); }
-      50%       { box-shadow: 0 0 28px rgba(201,168,76,0.6);  }
-    }
-
-    .cell-num {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .cell-ramadan {
-      font-size: clamp(0.5rem, 1.6vw, 0.6rem);
-      color: var(--teal-light);
-      margin-top: 2px;
-      letter-spacing: 0.05em;
-    }
-
-    .cal-cell.today .cell-num { color: var(--gold-light); }
-    .cal-cell.today .cell-ramadan { color: var(--gold); }
-    .cal-cell.past .cell-num { color: var(--text); }
-
-    .cal-cell.past::after {
-      content: '';
-      position: absolute;
-      bottom: 5px;
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--teal-light);
-      opacity: 0.7;
-    }
-
-    .footer-verse {
-      margin: 28px 20px 0;
-      width: calc(100% - 40px);
-      max-width: 460px;
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid rgba(201,168,76,0.2);
-    }
-
-    .footer-verse .arabic {
-      font-family: 'Amiri', serif;
-      font-size: 1.15rem;
-      color: var(--gold);
-      margin-bottom: 8px;
-      line-height: 1.8;
-    }
-
-    .footer-verse .translation {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      font-style: italic;
-      letter-spacing: 0.05em;
-      line-height: 1.6;
-    }
+    .today-card { display: flex; align-items: center; justify-content: space-between; }
+    .time-card { display: flex; justify-content: space-around; text-align: center; padding: 15px 20px; }
 
-    #detail {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      padding-bottom: 60px;
-    }
-
-    .detail-header {
-      position: relative;
-      padding: 56px 24px 36px;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .detail-header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 100% 100% at 50% 0%, rgba(15,107,107,0.5) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .back-btn {
-      position: absolute;
-      top: 20px; left: 20px;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      color: var(--gold);
-      font-size: 1.1rem;
-      z-index: 2;
-    }
-
-    .back-btn:hover {
-      background: rgba(201,168,76,0.15);
-      border-color: var(--gold);
-    }
-
-    .detail-day-badge {
-      display: inline-block;
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--teal-light);
-      border: 1px solid rgba(26,158,143,0.4);
-      border-radius: 50px;
-      padding: 5px 16px;
-      margin-bottom: 16px;
-    }
-
-    .detail-surah-num {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .detail-surah-name {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.6rem, 6vw, 2.4rem);
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-pale));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .detail-surah-arabic {
-      font-family: 'Amiri', serif;
-      font-size: 1.8rem;
-      color: var(--gold-pale);
-      opacity: 0.9;
-      margin-bottom: 6px;
-    }
-
-    .detail-surah-meta {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .sep {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 24px auto;
-      width: calc(100% - 48px);
-      max-width: 400px;
-    }
-
-    .sep-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
-    }
-
-    .sep-diamond {
-      width: 6px; height: 6px;
-      background: var(--gold);
-      transform: rotate(45deg);
-    }
-
-    .content-area {
-      padding: 0 24px;
-      max-width: 560px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .content-block {
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 14px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .content-block::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: linear-gradient(180deg, var(--gold), var(--teal));
-    }
-
-    .block-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--teal-light);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .block-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.08);
-    }
-
-    .block-text {
-      font-size: 0.9rem;
-      line-height: 1.75;
-      color: var(--text);
-      font-weight: 300;
-    }
-
-    .verse-card {
-      background: linear-gradient(135deg, rgba(15,107,107,0.3), rgba(201,168,76,0.1));
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 16px;
-      padding: 24px 20px;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-
-    .verse-arabic {
-      font-family: 'Amiri', serif;
-      font-size: 1.25rem;
-      color: var(--gold-light);
-      line-height: 2;
-      margin-bottom: 12px;
-      direction: rtl;
-    }
-
-    .verse-french {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      font-style: italic;
-      line-height: 1.65;
-    }
-
-    .verse-ref {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--teal-light);
-      margin-top: 12px;
-    }
-
-    .lessons-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .lesson-pill {
-      background: var(--surface);
-      border: 1px solid rgba(15,107,107,0.3);
-      border-radius: 12px;
-      padding: 14px 14px;
-      text-align: center;
-    }
-
-    .lesson-icon {
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-
-    .lesson-text {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
-
-    .detail-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px 0;
-      max-width: 560px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      cursor: pointer;
-      padding: 10px 16px;
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 50px;
-      transition: all 0.2s;
-      text-transform: uppercase;
-      background: var(--surface);
-    }
-
-    .nav-btn:hover {
-      background: rgba(201,168,76,0.15);
-      border-color: var(--gold);
-    }
-
-    .nav-btn:disabled, .nav-btn.disabled {
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    .time-item .time-label { font-size: 0.6rem; text-transform: uppercase; color: var(--teal-light); letter-spacing: 0.1em; margin-bottom: 5px; }
+    .time-item .time-val { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold-light); }
 
+    /* Calendar & Details (conservés de ton code) */
+    .calendar-wrap { width: calc(100% - 40px); max-width: 460px; margin: 0 20px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-cell { aspect-ratio: 1; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--surface); cursor: pointer; }
+    .cal-cell.today { border: 1px solid var(--gold); box-shadow: 0 0 15px var(--gold); }
+    
+    /* Animations */
     .anim { animation: fadeUp 0.5s ease both; }
-    .anim-1 { animation-delay: 0.05s; }
-    .anim-2 { animation-delay: 0.12s; }
-    .anim-3 { animation-delay: 0.18s; }
-    .anim-4 { animation-delay: 0.25s; }
-    .anim-5 { animation-delay: 0.32s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
 <div class="page" id="home">
-  <div class="header anim anim-1">
-    <div class="header-ornament">
-      <div class="ornament-line"></div>
-      <div class="crescent">☽</div>
-      <div class="ornament-line"></div>
-    </div>
+  <div class="header anim">
     <div class="header-title">Ramadan</div>
     <div class="header-sub">2026 · 1447 H</div>
-    <div class="arabic-title">رمضان</div>
   </div>
 
-  <div class="today-card anim anim-2" id="todayCard">
+  <div class="today-card anim" id="todayCard" style="animation-delay: 0.1s">
     <div class="today-left">
-      <div class="label">Jour Actuel</div>
-      <div class="day-num" id="todayNum">—</div>
-      <div class="day-name" id="todayDate">—</div>
+      <div id="todayNum" style="font-size: 2rem; color: var(--gold-light); font-family: 'Cinzel';">1</div>
+      <div id="todayDate" style="font-size: 0.8rem; color: var(--text-dim);">Jeudi 19 Février</div>
     </div>
-    <div class="today-right">
-      <div class="surah-num" id="todaySurahNum">Sourate</div>
-      <div class="surah-name" id="todaySurahName">—</div>
-      <div class="surah-arabic" id="todaySurahArabic">—</div>
+    <div class="today-right" style="text-align: right;">
+      <div id="todaySurahName" style="font-family: 'Cinzel';">Al-Fatiha</div>
+      <div id="todaySurahArabic" style="font-family: 'Amiri'; color: var(--gold);">الفاتحة</div>
     </div>
-    <div class="today-cta"></div>
   </div>
 
-  <div class="calendar-wrap anim anim-3">
-    <div class="cal-month-header">
-      <div class="cal-month-title" id="calMonthTitle">Février 2026</div>
-      <div class="cal-month-badge">Ramadan 1447</div>
+  <div class="time-card anim" style="animation-delay: 0.2s">
+    <div class="time-item">
+      <div class="time-label">Lever (Imsak)</div>
+      <div class="time-val" id="sunriseTime">--:--</div>
     </div>
-
-    <div class="cal-days-header">
-      <div class="cal-day-label">Lun</div>
-      <div class="cal-day-label">Mar</div>
-      <div class="cal-day-label">Mer</div>
-      <div class="cal-day-label">Jeu</div>
-      <div class="cal-day-label">Ven</div>
-      <div class="cal-day-label">Sam</div>
-      <div class="cal-day-label">Dim</div>
+    <div style="width: 1px; background: rgba(201,168,76,0.2);"></div>
+    <div class="time-item">
+      <div class="time-label">Coucher (Iftar)</div>
+      <div class="time-val" id="sunsetTime">--:--</div>
     </div>
+  </div>
 
+  <div class="calendar-wrap anim" style="animation-delay: 0.3s">
     <div class="cal-grid" id="calGrid"></div>
-  </div>
-
-  <div class="footer-verse anim anim-5">
-    <div class="arabic">شَهۡرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلۡقُرۡءَانُ</div>
-    <div class="translation">« Le mois de Ramadan est celui durant lequel le Coran a été révélé »<br/>— Al-Baqara : 185</div>
   </div>
 </div>
 
 <div class="page hidden" id="detail">
-  <div class="detail-header">
-    <button class="back-btn" id="backBtn" onclick="goHome()">←</button>
-    <div class="detail-day-badge" id="detailDayBadge">Jour 1 du Ramadan</div>
-    <div class="detail-surah-num" id="detailSurahNum">Sourate 1</div>
-    <div class="detail-surah-name" id="detailSurahName">—</div>
-    <div class="detail-surah-arabic" id="detailSurahArabic">—</div>
-    <div class="detail-surah-meta" id="detailSurahMeta">—</div>
-  </div>
-
-  <div class="sep">
-    <div class="sep-line"></div>
-    <div class="sep-diamond"></div>
-    <div class="sep-line"></div>
-  </div>
-
-  <div class="content-area">
-    <div class="verse-card anim anim-1">
-      <div class="verse-arabic" id="verseArabic">—</div>
-      <div class="verse-french" id="verseFrench">—</div>
-      <div class="verse-ref" id="verseRef">—</div>
+    <button onclick="goHome()" style="margin: 20px; color: var(--gold); background: none; border: 1px solid var(--gold); padding: 5px 15px; border-radius: 20px;">Retour</button>
+    <div id="detailContent" style="padding: 20px; text-align: center;">
+        <h1 id="detailSurahNameLarge" style="font-family: 'Cinzel Decorative'; color: var(--gold-light);"></h1>
+        <p id="detailText" style="margin-top: 20px; line-height: 1.6;"></p>
     </div>
-
-    <div class="content-block anim anim-2">
-      <div class="block-label">Contexte & Révélation</div>
-      <div class="block-text" id="detailContext">—</div>
-    </div>
-
-    <div class="content-block anim anim-3">
-      <div class="block-label">Thèmes Principaux</div>
-      <div class="block-text" id="detailThemes">—</div>
-    </div>
-
-    <div class="lessons-grid anim anim-4" id="lessonsGrid"></div>
-
-    <div class="content-block anim anim-5">
-      <div class="block-label">Réflexion du Jour</div>
-      <div class="block-text" id="detailReflection">—</div>
-    </div>
-  </div>
-
-  <div class="detail-nav">
-    <button class="nav-btn" id="prevBtn" onclick="navigateDay(-1)">← Précédent</button>
-    <button class="nav-btn" id="nextBtn" onclick="navigateDay(1)">Suivant →</button>
-  </div>
-
-  <div style="height:40px"></div>
 </div>
 
 <script>
-// DATA: 30 Surahs for 30 days
-const SURAHS = [
-  {
-    num: 1, name: "Al-Fatiha", arabic: "الفاتحة", meaning: "L'Ouverture",
-    meta: "Mecquoise · 7 versets",
-    verse: { ar: "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ", fr: "« Guide-nous vers le droit chemin »", ref: "Al-Fatiha : 6" },
-    context: "Révélée à La Mecque, Al-Fatiha est la première sourate du Coran. Elle constitue le pilier de la prière islamique — récitée au moins 17 fois par jour. Elle ouvre le Livre Sacré tel une clé ouvre une porte précieuse.",
-    themes: "Cette sourate condense l'essence de l'islam : la louange d'Allah (Seigneur des mondes, Le Tout-Miséricordieux), la reconnaissance de Sa souveraineté, la supplique pour être guidé et préservé des égarements. C'est une conversation intime entre le serviteur et son Créateur.",
-    lessons: [{ icon: "🤲", text: "Humilité devant Allah" }, { icon: "🛤️", text: "Recherche du droit chemin" }, { icon: "❤️", text: "La miséricorde divine" }, { icon: "🙏", text: "Adoration sincère" }],
-    reflection: "Aujourd'hui, lorsque vous réciterez Al-Fatiha dans votre prière, faites-le avec présence du cœur. Chaque mot est une supplication. Ressentez le dialogue avec Allah et demandez-Lui sincèrement la guidance."
-  },
-  {
-    num: 2, name: "Al-Baqara", arabic: "البقرة", meaning: "La Vache",
-    meta: "Médinoise · 286 versets · La plus longue sourate",
-    verse: { ar: "ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ", fr: "« Ce livre, il n'y a aucun doute en lui, est un guide pour les pieux »", ref: "Al-Baqara : 2" },
-    context: "La plus longue sourate du Coran, révélée à Médine après l'Hégire. Elle contient le fameux Verset du Trône (Ayat Al-Kursi), la législation islamique fondamentale, et l'histoire de la vache sacrée qui lui donne son nom.",
-    themes: "Al-Baqara traite de la foi, de la prière, du jeûne de Ramadan, du pèlerinage, des transactions financières éthiques, et de l'histoire des prophètes d'Adam à Ibrahim. Elle établit les fondements de la communauté musulmane (Oumma).",
-    lessons: [{ icon: "📖", text: "Le Coran comme guide" }, { icon: "🌙", text: "Le Ramadan révélé ici" }, { icon: "⚖️", text: "Justice et équité" }, { icon: "💡", text: "Lumière de la foi" }],
-    reflection: "Al-Baqara nous rappelle que le Coran est un guide vivant. En ce deuxième jour de Ramadan, engagez-vous à lire quelques versets chaque jour et à y réfléchir profondément."
-  },
-  {
-    num: 3, name: "Al-Imran", arabic: "آل عمران", meaning: "La Famille d'Imran",
-    meta: "Médinoise · 200 versets",
-    verse: { ar: "قُلۡ إِن كُنتُمۡ تُحِبُّونَ ٱللَّهَ فَٱتَّبِعُونِي", fr: "« Dis : Si vous aimez Allah, suivez-moi »", ref: "Al-Imran : 31" },
-    context: "Révélée après la bataille d'Ohod, cette sourate répond aux interrogations et doutes des croyants suite à leur défaite. Elle évoque la famille d'Imran (père de Maryam), la naissance miraculeuse de Yahya et Issa (Jésus).",
-    themes: "La sourate aborde la fermeté dans la foi face à l'adversité, l'unité de la communauté, la consultation (Choura), et présente Maryam (Marie) comme modèle de piété féminine. Elle appelle les gens du Livre à l'unité monothéiste.",
-    lessons: [{ icon: "💪", text: "Persévérance dans l'épreuve" }, { icon: "🤝", text: "Unité de l'Oumma" }, { icon: "⭐", text: "Maryam, modèle de piété" }, { icon: "❤️", text: "Amour sincère d'Allah" }],
-    reflection: "Aimer Allah se traduit par l'imitation du Prophète ﷺ. Aujourd'hui, choisissez une Sunna à appliquer concrètement dans votre quotidien."
-  },
-  {
-    num: 4, name: "An-Nisa", arabic: "النساء", meaning: "Les Femmes",
-    meta: "Médinoise · 176 versets",
-    verse: { ar: "يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُواْ رَبَّكُمُ ٱلَّذِي خَلَقَكُم مِّن نَّفۡسٖ وَٰحِدَةٖ", fr: "« Ô gens, craignez votre Seigneur qui vous a créés d'une seule âme »", ref: "An-Nisa : 1" },
-    context: "Révélée à Médine, An-Nisa établit un cadre juridique complet sur les droits des femmes, l'héritage, le mariage et la famille — révolutionnaire pour l'époque. Elle rappelle l'unité originelle de l'humanité.",
-    themes: "Les droits et devoirs dans la famille, la justice envers les orphelins, l'équité dans les relations hommes-femmes, l'interdiction de l'injustice sociale. La sourate insiste sur la crainte d'Allah (Taqwa) comme garde-fou moral.",
-    lessons: [{ icon: "👨‍👩‍👧", text: "Droits de la famille" }, { icon: "⚖️", text: "Justice sociale" }, { icon: "🌿", text: "Taqwa : conscience d'Allah" }, { icon: "🤲", text: "Protection des faibles" }],
-    reflection: "En ce quatrième jour, méditez sur vos relations familiales. Y a-t-il un droit que vous devez restituer ? Une injustice à réparer ? Agissez aujourd'hui."
-  },
-  {
-    num: 5, name: "Al-Ma'ida", arabic: "المائدة", meaning: "La Table Servie",
-    meta: "Médinoise · 120 versets",
-    verse: { ar: "ٱلۡيَوۡمَ أَكۡمَلۡتُ لَكُمۡ دِينَكُمۡ", fr: "« Aujourd'hui J'ai parachevé votre religion pour vous »", ref: "Al-Ma'ida : 3" },
-    context: "L'une des dernières sourates révélées, Al-Ma'ida contient le verset annonçant la perfection de l'islam. La 'table servie' fait référence au miracle de Jésus qui demanda à Allah de faire descendre une table du ciel.",
-    themes: "L'accomplissement de la religion, les lois alimentaires (halal/haram), les pactes et alliances, la justice envers toute personne même les ennemis, et les relations avec les Gens du Livre.",
-    lessons: [{ icon: "✅", text: "L'islam est complet" }, { icon: "🍽️", text: "Pureté de l'alimentation" }, { icon: "📜", text: "Respect des engagements" }, { icon: "⚡", text: "Justice absolue" }],
-    reflection: "La religion est complète — il n'y a rien à ajouter ni à retrancher. Aujourd'hui, approfondissez votre connaissance d'une pratique islamique que vous ne comprenez pas encore bien."
-  },
-  {
-    num: 6, name: "Al-An'am", arabic: "الأنعام", meaning: "Les Bestiaux",
-    meta: "Mecquoise · 165 versets",
-    verse: { ar: "وَعِندَهُۥ مَفَاتِحُ ٱلۡغَيۡبِ لَا يَعۡلَمُهَآ إِلَّا هُوَ", fr: "« Lui seul détient les clés de l'invisible, nul autre que Lui ne les connaît »", ref: "Al-An'am : 59" },
-    context: "Sourate mecquoise révélée d'un seul bloc selon de nombreux rapports, accompagnée de 70 000 anges. Elle répond aux polythéistes arabes qui adoraient les idoles et attribuaient à Allah des associés.",
-    themes: "Le Tawhid (monothéisme pur), la réfutation du polythéisme, les preuves de l'existence et de l'unicité d'Allah à travers la nature, la création, et le cosmos. Ibrahim y est présenté comme modèle du monothéiste rationnel.",
-    lessons: [{ icon: "☝️", text: "Unicité d'Allah" }, { icon: "🌌", text: "Signes dans l'univers" }, { icon: "🔑", text: "Les clés de l'invisible" }, { icon: "🌿", text: "Foi basée sur la réflexion" }],
-    reflection: "Regardez aujourd'hui le ciel, la nature, votre propre corps. Chaque détail est une preuve de l'existence d'Allah. Faites de la contemplation une ibada quotidienne."
-  },
-  {
-    num: 7, name: "Al-A'raf", arabic: "الأعراف", meaning: "Les Hauteurs",
-    meta: "Mecquoise · 206 versets",
-    verse: { ar: "خُذِ ٱلۡعَفۡوَ وَأۡمُرۡ بِٱلۡعُرۡفِ وَأَعۡرِضۡ عَنِ ٱلۡجَٰهِلِينَ", fr: "« Sois indulgent, ordonne ce qui est convenable et éloigne-toi des ignorants »", ref: "Al-A'raf : 199" },
-    context: "Les 'hauteurs' (Al-A'raf) désignent un endroit entre le Paradis et l'Enfer où se trouvent ceux dont les actions sont égales. La sourate retrace l'histoire de nombreux prophètes : Adam, Nuh, Hud, Salih, Lut, Shu'ayb, et Moussa.",
-    themes: "La lutte millénaire entre la guidance divine et les ruses de Satan, l'histoire des nations qui ont rejeté leurs prophètes et leur sort, l'importance de la gratitude et de l'humilité devant Allah.",
-    lessons: [{ icon: "😇", text: "Indulgence et pardon" }, { icon: "📚", text: "Histoire des prophètes" }, { icon: "🛡️", text: "Protection contre Satan" }, { icon: "🙏", text: "Gratitude envers Allah" }],
-    reflection: "La douceur face à l'ignorance est une force, non une faiblesse. Aujourd'hui, pratiquez la patience et l'indulgence face à quelqu'un qui vous a blessé."
-  },
-  {
-    num: 8, name: "Al-Anfal", arabic: "الأنفال", meaning: "Le Butin de Guerre",
-    meta: "Médinoise · 75 versets",
-    verse: { ar: "إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَواْ وَّٱلَّذِينَ هُم مُّحۡسِنُونَ", fr: "« Allah est avec ceux qui Le craignent et ceux qui font le bien »", ref: "Al-Anfal : 128" },
-    context: "Révélée après la bataille de Badr (première grande victoire musulmane), Al-Anfal réglemente le partage du butin et tire les leçons spirituelles de cette victoire miraculeuse où 313 croyants ont vaincu une armée de 1000 hommes.",
-    themes: "La vraie force vient de la foi, de la cohésion et de l'aide d'Allah — non du nombre ou des ressources. La trahison, la confiance en Allah, la solidarité, et les règles de la guerre juste.",
-    lessons: [{ icon: "🏆", text: "Victoire par la foi" }, { icon: "🤝", text: "Solidarité fraternelle" }, { icon: "⚔️", text: "Justice même en guerre" }, { icon: "🌟", text: "L'aide d'Allah" }],
-    reflection: "La vraie puissance n'est pas matérielle. Quels sont les obstacles dans votre vie qui vous semblent insurmontables ? Confiez-les à Allah avec foi."
-  },
-  {
-    num: 9, name: "At-Tawba", arabic: "التوبة", meaning: "Le Repentir",
-    meta: "Médinoise · 129 versets · Seule sans Basmala",
-    verse: { ar: "وَهُوَ ٱلَّذِي يَقۡبَلُ ٱلتَّوۡبَةَ عَنۡ عِبَادِهِۦ", fr: "« C'est Lui qui accepte le repentir de Ses serviteurs »", ref: "At-Tawba : 104" },
-    context: "La seule sourate sans Basmala en tête, car selon les savants, elle descend comme une épée — sans la miséricorde habituelle — contre la trahison. Elle traite des accords rompus et de la guerre défensive.",
-    themes: "Le repentir sincère (Tawba) comme porte toujours ouverte, la dénonciation de l'hypocrisie, la solidarité avec les pauvres (Zakat), et la notion de Jihad dans toutes ses dimensions (la plus grande étant le combat contre son ego).",
-    lessons: [{ icon: "🔄", text: "Tawba : retour à Allah" }, { icon: "💛", text: "Générosité et Zakat" }, { icon: "👁️", text: "Sincérité vs hypocrisie" }, { icon: "💪", text: "Jihad contre l'ego" }],
-    reflection: "La porte du repentir est ouverte jusqu'au dernier souffle. Y a-t-il quelque chose dont vous souhaitez vous repentir aujourd'hui ? Faites-le sincèrement, Allah est Al-Ghaffar (le Grand Pardonneur)."
-  },
-  {
-    num: 10, name: "Yunus", arabic: "يونس", meaning: "Jonas",
-    meta: "Mecquoise · 109 versets",
-    verse: { ar: "أَلَآ إِنَّ أَوۡلِيَآءَ ٱللَّهِ لَا خَوۡفٌ عَلَيۡهِمۡ وَلَا هُمۡ يَحۡزَنُونَ", fr: "« En vérité, les proches d'Allah n'ont aucune crainte et ne s'attristent pas »", ref: "Yunus : 62" },
-    context: "La sourate porte le nom du prophète Yunus (Jonas) qui fut avalé par une baleine après avoir quitté sa mission sans permission divine. Elle illustre la miséricorde infinie d'Allah qui répond à la supplication sincère.",
-    themes: "La certitude de la guidance divine, les signes d'Allah dans l'univers (la nuit, le jour, la mer), le récit de Nuh, de Moussa et de Yunus, et la promesse qu'Allah ne laisse jamais seul celui qui Le cherche sincèrement.",
-    lessons: [{ icon: "🐋", text: "La leçon de Yunus" }, { icon: "🌊", text: "Confiance dans l'épreuve" }, { icon: "✨", text: "Proches d'Allah : sans peur" }, { icon: "🌙", text: "Signes divins dans la nuit" }],
-    reflection: "Comme Yunus dans les profondeurs, criez vers Allah dans vos moments les plus sombres. Sa réponse viendra. Pratiquez aujourd'hui la dou'a de Yunus : سبحانك إني كنت من الظالمين"
-  },
-  {
-    num: 11, name: "Hud", arabic: "هود", meaning: "Houd",
-    meta: "Mecquoise · 123 versets",
-    verse: { ar: "فَٱسۡتَقِمۡ كَمَآ أُمِرۡتَ", fr: "« Sois donc droit comme il t'a été ordonné »", ref: "Hud : 112" },
-    context: "Le Prophète ﷺ a dit que cette sourate l'a fait vieillir prématurément tant elle est intense. Elle retrace les histoires de sept prophètes (Nuh, Hud, Salih, Ibrahim, Lut, Shu'ayb, Moussa) et les destructions des peuples rebelles.",
-    themes: "L'Istiqqama (la droiture constante) comme sommet de la foi. La patience des prophètes face au rejet, la certitude du triomphe final de la vérité, et le danger de l'arrogance et du déni des signes divins.",
-    lessons: [{ icon: "📏", text: "Istiqama : droiture constante" }, { icon: "⏳", text: "Patience prophétique" }, { icon: "⚡", text: "Conséquences de l'arrogance" }, { icon: "🌱", text: "La vérité triomphe toujours" }],
-    reflection: "L'Istiqama — être droit dans les actes, les paroles et les intentions — est la demande la plus profonde du Coran. Évaluez honnêtement aujourd'hui votre droiture dans un domaine précis de votre vie."
-  },
-  {
-    num: 12, name: "Yusuf", arabic: "يوسف", meaning: "Joseph",
-    meta: "Mecquoise · 111 versets · La plus belle des histoires",
-    verse: { ar: "إِنَّهُۥ mَن يَتَّقِ وَيَصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ", fr: "« Celui qui craint Allah et qui endure — Allah ne laisse pas perdre la récompense des bienfaisants »", ref: "Yusuf : 90" },
-    context: "Allah la nomme Lui-même 'la plus belle des histoires'. L'histoire de Yusuf (Joseph) — vendu comme esclave par ses frères, tenté, emprisonné, puis élevé au rang de ministre d'Égypte — est un chef-d'œuvre de résilience divine.",
-    themes: "La patience (Sabr) face à la trahison, la chasteté face à la tentation, le pardon face à l'injustice. Yusuf ne se venge jamais de ses frères. Sa vie illustre que chaque épreuve est en réalité un escalier vers les sommets.",
-    lessons: [{ icon: "💎", text: "Patience transformatrice" }, { icon: "🕊️", text: "Pardon sans condition" }, { icon: "🌟", text: "Chaque épreuve est un escalier" }, { icon: "🛡️", text: "Chasteté comme force" }],
-    reflection: "Yusuf a tout perdu avant de tout regagner. Quelle est l'épreuve dans votre vie qui pourrait être, en réalité, la porte vers votre meilleur avenir ? Confiez-la à Allah."
-  },
-  {
-    num: 13, name: "Ar-Ra'd", arabic: "الرعد", meaning: "Le Tonnerre",
-    meta: "Médinoise · 43 versets",
-    verse: { ar: "إِنَّ ٱللَّهَ لَا يُغَيِّرُ مَا بِقَوۡمٍ حَتَّىٰ يُغَيِّرُواْ مَا بِأَنفُسِهِمۡ", fr: "« Allah ne change pas l'état d'un peuple tant que ses membres ne changent pas ce qui est en eux-mêmes »", ref: "Ar-Ra'd : 11" },
-    context: "La sourate du Tonnerre, dont le son est lui-même mentionné comme glorifiant Allah. Elle décrit les signes cosmiques de l'existence d'Allah : les nuages, la pluie, la foudre, les rivières, les arbres en prosternation.",
-    themes: "La loi universelle du changement : tout changement extérieur commence à l'intérieur. Les attributs d'Allah (Al-Asma al-Husna), la certitude du Jugement dernier, et la paix du cœur par le dhikr.",
-    lessons: [{ icon: "⚡", text: "Le tonnerre glorifie Allah" }, { icon: "🔄", text: "Changez vous-mêmes d'abord" }, { icon: "☮️", text: "Paix par le Dhikr" }, { icon: "🌧️", text: "Signes dans la nature" }],
-    reflection: "Si vous voulez que votre vie change, commencez par changer votre intérieur. Identifiez UNE habitude à transformer ce Ramadan et engagez-vous."
-  },
-  {
-    num: 14, name: "Ibrahim", arabic: "إبراهيم", meaning: "Abraham",
-    meta: "Mecquoise · 52 versets",
-    verse: { ar: "وَإِذۡ تَأَذَّنَ رَبُّكُمۡ لَئِن شَكَرۡتُمۡ لَأَزِيدَنَّكُمۡ", fr: "« Si vous êtes reconnaissants, J'augmenterai [Mes bienfaits] pour vous »", ref: "Ibrahim : 7" },
-    context: "La sourate rappelle la supplication d'Ibrahim pour La Mecque et sa descendance, incluant la prière pour que ses enfants soient des hommes de prière. Elle contient la métaphore magnifique de l'arbre de la bonne parole.",
-    themes: "La gratitude (Shukr) comme multiplicateur de bienfaits, la bonne parole comparée à un arbre aux racines profondes et aux branches célestes, la dou'a d'Ibrahim pour sa communauté et sa famille.",
-    lessons: [{ icon: "🌳", text: "La bonne parole comme arbre" }, { icon: "🙏", text: "Gratitude multiplie les dons" }, { icon: "👨‍👩‍👦", text: "Dou'a pour sa famille" }, { icon: "🏠", text: "Ibrahim bâtit la Ka'ba" }],
-    reflection: "La gratitude est une clé cosmique. Faites une liste de 10 bienfaits d'Allah dans votre vie. Puis dites Alhamdulillah pour chacun avec présence du cœur."
-  },
-  {
-    num: 15, name: "Al-Hijr", arabic: "الحجر", meaning: "Al-Hijr",
-    meta: "Mecquoise · 99 versets",
-    verse: { ar: "إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ", fr: "« C'est Nous qui avons fait descendre le Rappel, et c'est Nous qui en sommes le gardien »", ref: "Al-Hijr : 9" },
-    context: "Al-Hijr est une région du Hijaz où vivait le peuple de Thamud. La sourate contient la promesse divine de préserver le Coran de toute altération — une promesse qui se vérifie à travers 14 siècles de transmission parfaite.",
-    themes: "La protection divine du Coran, la création d'Adam et la désobéissance d'Iblis (Satan), les histoires de Lut et des peuples détruits, et la consolation du Prophète face aux moqueries.",
-    lessons: [{ icon: "📖", text: "Le Coran : préservé à jamais" }, { icon: "😇", text: "Création d'Adam en argile" }, { icon: "😈", text: "L'arrogance d'Iblis" }, { icon: "💚", text: "Consolation divine" }],
-    reflection: "Le Coran est le seul livre divin préservé intact. Quelle relation entretenez-vous avec lui ? Engagez-vous à le réciter et à le comprendre davantage ce Ramadan."
-  },
-  {
-    num: 16, name: "An-Nahl", arabic: "النحل", meaning: "L'Abeille",
-    meta: "Mecquoise · 128 versets · Sourate des bienfaits",
-    verse: { ar: "وَأَوۡحَىٰ رَبُّكَ إِلَى ٱلنَّحۡلِ", fr: "« Ton Seigneur a inspiré l'abeille »", ref: "An-Nahl : 68" },
-    context: "La sourate de l'Abeille évoque ce petit insecte qui reçoit une révélation divine pour construire ses ruches et produire du miel — guérison pour les hommes. Elle contient des descriptions époustouflantes des bienfaits d'Allah.",
-    themes: "La gratitude pour les innombrables bienfaits d'Allah (le ciel, la terre, la mer, les animaux, le miel, le lait), le commandement de la justice et de la bonté (Ihsan), et l'interdiction de la tricherie dans les mesures.",
-    lessons: [{ icon: "🐝", text: "Sagesse de l'abeille" }, { icon: "🍯", text: "Le miel comme guérison" }, { icon: "⭐", text: "Ihsan : excellence morale" }, { icon: "🌺", text: "Bienfaits innombrables" }],
-    reflection: "Allah a enseigné à une simple abeille à construire des ruches parfaites. Quel don ou talent vous a-t-Il donné ? Utilisez-le aujourd'hui pour servir autrui."
-  },
-  {
-    num: 17, name: "Al-Isra", arabic: "الإسراء", meaning: "Le Voyage Nocturne",
-    meta: "Mecquoise · 111 versets",
-    verse: { ar: "سُبۡحَٰنَ ٱلَّذِيٓ أَسۡرَىٰ بِعَبۡدِهِۦ لَيۡلٗا", fr: "« Gloire à Celui qui a fait voyager Son serviteur de nuit »", ref: "Al-Isra : 1" },
-    context: "La sourate s'ouvre sur le miracle du voyage nocturne (Isra) de La Mecque à Jérusalem, puis l'ascension céleste (Mi'raj). C'est lors de ce voyage que les cinq prières ont été prescrites à l'humanité.",
-    themes: "Les dix commandements coraniques (honorer ses parents, éviter le gaspillage, la chasteté, la justice), la centralité de Jérusalem dans l'islam, le don des cinq prières, et la supplication magnifique : 'Rabbizidni ilma' (Seigneur, accroît ma science).",
-    lessons: [{ icon: "🚀", text: "Isra et Mi'raj" }, { icon: "🕌", text: "Al-Qods, première Qibla" }, { icon: "🙌", text: "Les 5 prières, don divin" }, { icon: "📚", text: "Rabbizidni ilma" }],
-    reflection: "Les cinq prières sont le don du Mi'raj — un lien direct entre vous et Allah, 5 fois par jour. Comment vivez-vous vos prières ? Sont-elles un fardeau ou un refuge ?"
-  },
-  {
-    num: 18, name: "Al-Kahf", arabic: "الكهف", meaning: "La Caverne",
-    meta: "Mecquoise · 110 versets · Réciter le vendredi",
-    verse: { ar: "وَلَا تَقُولَنَّ lِشَاىۡءٍ إِنِّي فَاعِلٞ ذَٰلِكَ غَدًا إِلَّآ أَن يَشَآءَ ٱللَّهُ", fr: "« Ne dis jamais de quoi que ce soit : Je le ferai demain, sauf si Allah le veut »", ref: "Al-Kahf : 23-24" },
-    context: "Recommandée à réciter chaque vendredi, Al-Kahf contient quatre histoires symboliques : les Gens de la Caverne (foi contre tyrannie), le Jardinier (orgueil), Moussa et Al-Khidr (sagesse cachée), et Dhou Al-Qarnayn (juste gouvernance).",
-    themes: "Protection contre le Dajjal (Antéchrist), les quatre fitnats (épreuves) de la foi, la richesse, la connaissance et le pouvoir. Al-Khidr enseigne à Moussa que la sagesse divine dépasse l'intelligence humaine.",
-    lessons: [{ icon: "🏔️", text: "Foi contre la tyrannie" }, { icon: "💡", text: "Sagesse cachée d'Al-Khidr" }, { icon: "🌺", text: "Cette vie est éphémère" }, { icon: "📅", text: "Dire toujours Insha'Allah" }],
-    reflection: "Al-Kahf est le bouclier du vendredi contre les épreuves du monde. Avez-vous la routine de la réciter chaque vendredi ? Commencez aujourd'hui."
-  },
-  {
-    num: 19, name: "Maryam", arabic: "مريم", meaning: "Marie",
-    meta: "Mecquoise · 98 versets",
-    verse: { ar: "وَٱذۡكُرۡ فِي ٱلۡكِتَٰبِ مَرۡيَمَ", fr: "« Et mentionne dans le Livre, Marie »", ref: "Maryam : 16" },
-    context: "Maryam (Marie) est la seule femme nommément citée dans le Coran et la seule à avoir une sourate entière à son nom. La naissance miraculeuse de Jésus y est décrite, ainsi que la foi inébranlable de Zakariya et la naissance de Yahya.",
-    themes: "La pureté et la chasteté comme force spirituelle, les miracles accordés aux croyants sincères, la parole de Jésus dès son berceau affirmant l'unité d'Allah, et la tendresse d'Allah envers Ses serviteurs dévoués.",
-    lessons: [{ icon: "👸", text: "Maryam, modèle universel" }, { icon: "👶", text: "Jésus parle du berceau" }, { icon: "🌴", text: "Secouez le palmier" }, { icon: "🤲", text: "Dou'a de Zakariya" }],
-    reflection: "Maryam était seule, effrayée, mais Allah lui envoya nourriture et réconfort. Dans vos moments de solitude, sachez qu'Allah est proche. Invoquez-Le comme Zakariya : 'Rabbi la tadharni fardan wa anta khayrul warithin.'"
-  },
-  {
-    num: 20, name: "Ta-Ha", arabic: "طه", meaning: "Ta-Ha",
-    meta: "Mecquoise · 135 versets",
-    verse: { ar: "رَبِّ ٱشۡرَحۡ لِي صَدۡرِي وَيَسِّرۡ لِيٓ أَمۡرِي", fr: "« Mon Seigneur, ouvre-moi ma poitrine et facilite-moi ma tâche »", ref: "Ta-Ha : 25-26" },
-    context: "Ta-Ha est l'une des lettres mystérieuses que le Coran n'explique pas. La sourate raconte longuement l'histoire de Moussa — sa révélation au buisson ardent, sa confrontation avec Pharaon, et le miracle de la mer fendue.",
-    themes: "La dou'a de Moussa pour être assisté (sa prière utilisée par des millions comme supplication), la confiance en Allah face au pouvoir oppresseur, et l'histoire d'Adam et Eve comme rappel de la nature humaine.",
-    lessons: [{ icon: "🔥", text: "Le Buisson Ardent" }, { icon: "🌊", text: "La mer se fend" }, { icon: "💬", text: "La dou'a de Moussa" }, { icon: "🎯", text: "Mission divine" }],
-    reflection: "Utilisez la dou'a de Moussa avant chaque défi : 'Rabb ishrah li sadri wa yassir li amri.' C'est la prière du leader qui sait sa faiblesse et cherche la force auprès d'Allah."
-  },
-  {
-    num: 21, name: "Al-Anbiya", arabic: "الأنبياء", meaning: "Les Prophètes",
-    meta: "Mecquoise · 112 versets",
-    verse: { ar: "وَمَآ أَرۡسَلۡنَٰكَ إِلَّا رَحۡمَةٗ lِّلۡعَٰلَمِينَ", fr: "« Nous ne t'avons envoyé qu'en tant que miséricorde pour les univers »", ref: "Al-Anbiya : 107" },
-    context: "La sourate des Prophètes défile dix-huit prophètes en un seul texte poétique : Ibrahim, Lut, Nuh, Dawud, Sulayman, Ayyub, Yunus, Zakariya, Yahya, Maryam, et l'annonce du Prophète Muhammad ﷺ comme miséricorde universelle.",
-    themes: "L'unicité du message prophétique à travers les âges, la fraternité des prophètes, la miséricorde comme essence de l'islam, et la dou'a d'Ayyub (Job) dans l'épreuve : 'Rabb anni massaniya al-durru wa anta arhamu al-rahimin.'",
-    lessons: [{ icon: "🕊️", text: "Le Prophète ﷺ, miséricorde" }, { icon: "🌍", text: "Message universel" }, { icon: "🤝", text: "Fraternité des prophètes" }, { icon: "💪", text: "Patience d'Ayyub" }],
-    reflection: "Muhammad ﷺ est une miséricorde pour tous les univers — pas seulement pour les musulmans. Comment pouvez-vous incarner cette miséricorde dans vos interactions aujourd'hui ?"
-  },
-  {
-    num: 22, name: "Al-Hajj", arabic: "الحج", meaning: "Le Pèlerinage",
-    meta: "Médinoise · 78 versets",
-    verse: { ar: "وَأَذِّن فِي ٱلنَّاسِ بِٱلۡحَجِّ يَأۡتُوكَ رِجَالٗا وَعَلَىٰ كُلِّ ضَامِرٖ يَأۡتِينَ مِن كُلِّ فَجٍّ عَمِيقٖ", fr: "« Proclame le Pèlerinage aux gens ; ils viendront à pied et sur toute monture rapide »", ref: "Al-Hajj : 27" },
-    context: "La sourate du Pèlerinage décrit cet acte d'adoration unique où des millions de croyants se rassemblent en un seul lieu, vêtus de blanc, rappelant le Jugement dernier. Elle contient l'un des versets les plus forts sur la résurrection.",
-    themes: "Le Hajj comme symbole de l'égalité humaine devant Allah, l'histoire de la Ka'ba et d'Ibrahim, la permission du Jihad défensif, et la vie comme offrande à Allah — 'Qul inna salati wa nusuki wa mahyaya wa mamati lillahi rabbi al-alamin.'",
-    lessons: [{ icon: "🕋", text: "La Ka'ba, maison d'Allah" }, { icon: "⚖️", text: "Égalité de l'humanité" }, { icon: "🌍", text: "Rassemblement mondial" }, { icon: "🤍", text: "Vie offerte à Allah" }],
-    reflection: "Même si vous ne faites pas le Hajj cette année, faites le Hajj spirituel : purifiez votre cœur, simplifiez votre vie, et renouvelez votre intention de vivre pour Allah."
-  },
-  {
-    num: 23, name: "Al-Mu'minun", arabic: "المؤمنون", meaning: "Les Croyants",
-    meta: "Mecquoise · 118 versets",
-    verse: { ar: "قَدۡ أَفۡلَحَ ٱلۡمُؤۡمِنُونَ", fr: "« Vraiment, les croyants ont réussi »", ref: "Al-Mu'minun : 1" },
-    context: "La sourate s'ouvre par 'Qad aflaha al-mu'minun' — une déclaration divine de succès pour les croyants ! Elle dresse le portrait précis du croyant accompli en sept qualités, un idéal spirituel et moral.",
-    themes: "Les sept caractéristiques des croyants qui réussissent : humilité dans la prière, éloignement du futile, acquittement de la Zakat, préservation de la chasteté, fidélité aux engagements, accomplissement de la prière. La recette du succès.",
-    lessons: [{ icon: "✅", text: "7 traits du croyant" }, { icon: "🙏", text: "Khushu' dans la prière" }, { icon: "🚫", text: "Fuir le futile" }, { icon: "🌟", text: "Le succès est garanti" }],
-    reflection: "Évaluez-vous honnêtement sur ces 7 traits : humilité, évitement du futile, Zakat, chasteté, honnêteté, prière. Quel est votre point le plus faible ? Travaillez-y ce Ramadan."
-  },
-  {
-    num: 24, name: "An-Nur", arabic: "النور", meaning: "La Lumière",
-    meta: "Médinoise · 64 versets",
-    verse: { ar: "ٱللَّهُ نُورُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ", fr: "« Allah est la Lumière des cieux et de la terre »", ref: "An-Nur : 35" },
-    context: "La sourate commence par des ordonnances sur la chasteté et la calomnie, puis s'élève vers le célèbre verset de la Lumière — métaphore mystique de la présence divine dans toute la création. Une sourate entre la loi et la spiritualité.",
-    themes: "La lumière divine comme essence de toute réalité, la protection de l'honneur et de la famille, les règles de modestie et de permission dans les foyers. L'interconnexion entre la pureté du corps et la pureté du cœur.",
-    lessons: [{ icon: "💡", text: "Allah, Lumière des cieux" }, { icon: "🏠", text: "Sanctuaire du foyer" }, { icon: "👁️", text: "Modestie du regard" }, { icon: "🌟", text: "Pureté intérieure" }],
-    reflection: "Le verset de la Lumière (Ayat An-Nur) est parmi les plus beaux du Coran. Mémorisez-le aujourd'hui et méditez sur sa signification : Allah est la lumière de tout ce qui existe."
-  },
-  {
-    num: 25, name: "Al-Furqan", arabic: "الفرقان", meaning: "Le Critère",
-    meta: "Mecquoise · 77 versets",
-    verse: { ar: "وَعِبَادُ ٱلرَّحۡmَٰنِ ٱلَّذِينَ يَمۡشُونَ عَلَى ٱلۡأَرۡضِ هَوۡنٗا", fr: "« Les serviteurs du Tout-Miséricordieux sont ceux qui marchent humblement sur la terre »", ref: "Al-Furqan : 63" },
-    context: "Al-Furqan (le Critère) est un nom du Coran car il distingue le vrai du faux, le bien du mal. La sourate décrit avec poésie les caractéristiques des 'Ibad Ar-Rahman (serviteurs du Miséricordieux) — un idéal de vie islamique.",
-    themes: "Les 10 qualités des serviteurs du Miséricordieux : humilité dans la démarche, paix face à l'ignorance, dévotion nocturne, crainte de l'Enfer, juste dépense, chasteté, honnêteté, et constance dans la prière.",
-    lessons: [{ icon: "🚶", text: "Marcher avec humilité" }, { icon: "🌙", text: "Veille nocturne (Qiyam)" }, { icon: "☮️", text: "Saluer l'ignorant" }, { icon: "⚖️", text: "Équilibre dans la dépense" }],
-    reflection: "Les 'Ibad Ar-Rahman ne sont pas des ascètes inaccessibles — ce sont des gens ordinaires avec une qualité extraordinaire : la conscience permanente d'Allah. Lequel de leurs traits pouvez-vous incarner aujourd'hui ?"
-  },
-  {
-    num: 26, name: "Ash-Shu'ara", arabic: "الشعراء", meaning: "Les Poètes",
-    meta: "Mecquoise · 227 versets",
-    verse: { ar: "وَتَوَكَّلۡ عَلَى ٱلۡعَزِيزِ ٱلرَّحِيمِ", fr: "« Et place ta confiance en le Puissant, le Miséricordieux »", ref: "Ash-Shu'ara : 217" },
-    context: "La deuxième plus longue sourate mecquoise, elle défile les histoires de Moussa, Ibrahim, Nuh, Hud, Salih, Lut et Shu'ayb avec un refrain répété : 'Inna fi dhalika la-ayatan wa ma kana aktharuhum mu'minin.' La vraie poésie est celle du Coran.",
-    themes: "La puissance du verbe divin vs les illusions des poètes, la Tawakkul (confiance totale en Allah), et la constance des prophètes face au rejet de leurs peuples. Chaque story se termine par le même constat : peu croient.",
-    lessons: [{ icon: "✍️", text: "Le Coran, poésie divine" }, { icon: "🛡️", text: "Tawakkul : confiance en Allah" }, { icon: "🔄", text: "Histoires des prophètes" }, { icon: "💎", text: "Constance dans la da'wa" }],
-    reflection: "La Tawakkul n'est pas passivité — c'est agir de son mieux, puis confier le résultat à Allah. Y a-t-il une situation dans votre vie où vous devez lâcher prise et faire confiance à Allah ?"
-  },
-  {
-    num: 27, name: "An-Naml", arabic: "النمل", meaning: "Les Fourmis",
-    meta: "Mecquoise · 93 versets",
-    verse: { ar: "وَإِنَّكَ لَتُلَقَّى ٱلۡقُرۡءَانَ مِن لَّدُنۡ حَكِيمٍ عَلِيمٖ", fr: "« Tu reçois le Coran de la part d'un Sage, d'un Omniscient »", ref: "An-Naml : 6" },
-    context: "La sourate où une fourmi prévient ses compagnes de l'approche de Sulayman (Salomon) — et le prophète sourit en entendant. Sulayman parle aux oiseaux et commande le vent. La Reine de Saba (Bilqis) se soumet à la vérité.",
-    themes: "La magnificence du royaume de Sulayman accordé par Allah, la sagesse comme don divin, la Hudhud (huppe fasciée) comme messager, et la Reine de Saba qui choisit la vérité sur le pouvoir — modèle de gouvernance éclairée.",
-    lessons: [{ icon: "🐜", text: "La fourmi qui enseigne" }, { icon: "👑", text: "Sulayman, roi-prophète" }, { icon: "🦅", text: "La Hudhud, messager" }, { icon: "👸", text: "Bilqis choisit la vérité" }],
-    reflection: "Une simple fourmi a sa place dans le Coran parce qu'elle remplit parfaitement son rôle. Quelle est votre 'mission' unique ? Remplissez-la avec excellence — c'est votre ibada."
-  },
-  {
-    num: 28, name: "Al-Qasas", arabic: "القصص", meaning: "Le Récit",
-    meta: "Mecquoise · 88 versets",
-    verse: { ar: "إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلۡفَرِحِينَ", fr: "« Allah n'aime pas ceux qui s'enorgueillissent »", ref: "Al-Qasas : 76" },
-    context: "La plus longue narration de Moussa dans le Coran, depuis sa naissance jusqu'à la confrontation avec Pharaon. Elle inclut aussi l'histoire de Qarun — l'homme le plus riche de son époque — englouti par la terre à cause de son arrogance.",
-    themes: "Le danger de l'orgueil lié à la richesse (Qarun), la gratitude comme antidote, la foi de la mère de Moussa qui jette son bébé dans le Nil sur ordre divin — confiance absolue — et la récompense pour ceux qui restent humbles.",
-    lessons: [{ icon: "🌊", text: "La mère de Moussa" }, { icon: "💰", text: "Le danger de Qarun" }, { icon: "🙏", text: "Humilité vs arrogance" }, { icon: "⬇️", text: "L'orgueil fait tomber" }],
-    reflection: "Qarun croyait que sa richesse venait de son intelligence. Sommes-nous parfois comme Qarun ? Attribuons-nous nos succès à nos propres mérites en oubliant les dons d'Allah ?"
-  },
-  {
-    num: 29, name: "Al-Ankabut", arabic: "العنكبوت", meaning: "L'Araignée",
-    meta: "Mecquoise · 69 versets",
-    verse: { ar: "وَٱلَّذِينَ جَٰهَدُواْ فِينَا لَنَهۡدِيَنَّهُمۡ سُبُلَنَا", fr: "« Ceux qui luttent pour Nous, Nous les guiderons vers Nos voies »", ref: "Al-Ankabut : 69" },
-    context: "La dernière sourate mecquoise. La métaphore de la toile d'araignée — si fragile qu'un souffle suffit à la détruire — illustre la faiblesse des fausses divinités. La foi authentique est la seule maison solide.",
-    themes: "L'épreuve comme nécessité de la foi, la toile d'araignée comme symbole des appuis illusoires, la promesse de guidance pour ceux qui luttent, et la patience comme condition du succès spirituel.",
-    lessons: [{ icon: "🕷️", text: "Les idoles sont fragiles" }, { icon: "💪", text: "Lutter pour Allah" }, { icon: "🛤️", text: "Allah guide les sincères" }, { icon: "⏳", text: "L'épreuve purifie" }],
-    reflection: "Sur quoi s'appuie votre sécurité ? Sur des 'toiles d'araignée' — argent, statut, relations humaines — ou sur Allah, l'unique appui solide ? Ce Ramadan, réalignez vos dépendances."
-  },
-  {
-    num: 30, name: "Ar-Rum", arabic: "الروم", meaning: "Les Romains",
-    meta: "Mecquoise · 60 versets",
-    verse: { ar: "فَسُبۡحَٰنَ ٱللَّهِ حِينَ تُمۡسُونَ وَحِينَ تُصۡبِحُونَ", fr: "« Glorifiez Allah le soir et le matin »", ref: "Ar-Rum : 17" },
-    context: "Révélée après la défaite des Romains (Byzantins) par les Perses, la sourate prédit leur victoire dans quelques années — prédiction réalisée à la lettre. Ce miracle prophétique a converti de nombreux Mecquois.",
-    themes: "Les signes d'Allah dans la création (diversité des langues, des couleurs, le sommeil, la foudre), le cycle naturel de vie-mort-renaissance comme preuve de la Résurrection, et la glorification d'Allah à chaque moment de la journée.",
-    lessons: [{ icon: "🌅", text: "Dhikr matin et soir" }, { icon: "🌈", text: "Diversité des langues" }, { icon: "🔮", text: "Prophétie réalisée" }, { icon: "♻️", text: "Cycle vie-mort-renaissance" }],
-    reflection: "En ce dernier jour du calendrier, la sourate nous appelle à glorifier Allah matin et soir. Ce Ramadan vous a-t-il rapproché d'Allah ? Engagez-vous à continuer après Ramadan avec au moins un acte quotidien."
-  }
-];
-
-// RAMADAN 2026: starts February 19, 2026
-const RAMADAN_START = new Date(2026, 1, 19); // Changement effectué ici
+const RAMADAN_START = new Date(2026, 1, 19);
 const RAMADAN_DAYS = 30;
 
-function getRamadanDay(date) {
-  const d = new Date(date);
-  d.setHours(0,0,0,0);
-  const start = new Date(RAMADAN_START);
-  start.setHours(0,0,0,0);
-  const diff = Math.floor((d - start) / 86400000) + 1;
-  if (diff >= 1 && diff <= RAMADAN_DAYS) return diff;
-  return null;
-}
+// Les données des sourates (abrégées ici pour le code, garde ta liste complète)
+const SURAHS = [
+    { num: 1, name: "Al-Fatiha", arabic: "الفاتحة", meaning: "L'Ouverture", context: "Révélée à La Mecque..." },
+    { num: 2, name: "Al-Baqara", arabic: "البقرة", meaning: "La Vache", context: "La plus longue sourate..." },
+    // ... Ajoute tes 30 sourates ici
+];
 
-function getDateForRamadanDay(n) {
-  const d = new Date(RAMADAN_START);
-  d.setDate(d.getDate() + n - 1);
-  return d;
-}
-
-const today = new Date();
-today.setHours(0,0,0,0);
-const todayRamadan = getRamadanDay(today);
-let currentDetailDay = null;
-
-function updateTodayCard() {
-  const dayNum = document.getElementById('todayNum');
-  const dayDate = document.getElementById('todayDate');
-  const sNum = document.getElementById('todaySurahNum');
-  const sName = document.getElementById('todaySurahName');
-  const sAr = document.getElementById('todaySurahArabic');
-  const card = document.getElementById('todayCard');
-
-  if (todayRamadan) {
-    const s = SURAHS[todayRamadan - 1];
-    dayNum.textContent = todayRamadan;
-    dayDate.textContent = today.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
-    sNum.textContent = `Sourate ${s.num}`;
-    sName.textContent = s.name;
-    sAr.textContent = s.arabic;
-    card.style.cursor = 'pointer';
-    card.onclick = () => openDetail(todayRamadan);
-  } else {
-    const beforeRamadan = today < RAMADAN_START;
-    if (beforeRamadan) {
-      const diff = Math.ceil((RAMADAN_START - today) / 86400000);
-      dayNum.textContent = diff;
-      dayDate.textContent = 'jours avant Ramadan';
-      sNum.textContent = 'À partir du';
-      sName.textContent = '19 Fév 2026'; // Mise à jour de la date affichée
-      sAr.textContent = '١٤٤٧ هـ';
-    } else {
-      dayNum.textContent = '—';
-      dayDate.textContent = 'Ramadan est terminé';
-      sNum.textContent = 'Ramadan';
-      sName.textContent = '1447 H';
-      sAr.textContent = 'رمضان';
-    }
+// --- LOGIQUE GEOLOCALISATION & HORAIRES ---
+async function fetchSolarTimes() {
+  if (!navigator.geolocation) {
+    console.log("La géolocalisation n'est pas supportée.");
+    return;
   }
+
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    
+    try {
+      // Appel à l'API sunrise-sunset.org (Gratuit, pas de clé nécessaire)
+      const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0&date=today`);
+      const data = await response.json();
+      
+      if (data.status === "OK") {
+        const sunrise = new Date(data.results.sunrise);
+        const sunset = new Date(data.results.sunset);
+
+        // Formatage local (ex: 06:42)
+        const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+        document.getElementById('sunriseTime').textContent = sunrise.toLocaleTimeString('fr-FR', options);
+        document.getElementById('sunsetTime').textContent = sunset.toLocaleTimeString('fr-FR', options);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des horaires:", error);
+    }
+  });
+}
+
+// --- LOGIQUE CALENDRIER ---
+function getRamadanDay(date) {
+  const d = new Date(date); d.setHours(0,0,0,0);
+  const start = new Date(RAMADAN_START); start.setHours(0,0,0,0);
+  const diff = Math.floor((d - start) / 86400000) + 1;
+  return (diff >= 1 && diff <= RAMADAN_DAYS) ? diff : null;
 }
 
 function buildCalendar() {
   const grid = document.getElementById('calGrid');
-  const monthTitle = document.getElementById('calMonthTitle');
-  grid.innerHTML = '';
-
-  const startDate = new Date(RAMADAN_START);
-  const startDow = (startDate.getDay() + 6) % 7; 
-
-  monthTitle.textContent = 'Fév — Mar 2026';
-
-  for (let i = 0; i < startDow; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'cal-cell empty';
-    grid.appendChild(cell);
-  }
-
+  const today = new Date(); today.setHours(0,0,0,0);
+  
   for (let day = 1; day <= RAMADAN_DAYS; day++) {
-    const date = getDateForRamadanDay(day);
+    const date = new Date(RAMADAN_START);
+    date.setDate(date.getDate() + day - 1);
+    
     const cell = document.createElement('div');
-    const isToday = date.getTime() === today.getTime();
-    const isPast = date < today;
-    const isFuture = date > today;
-
-    let stateClass = '';
-    if (isToday) stateClass = 'today';
-    else if (isPast) stateClass = 'past';
-    else stateClass = 'future';
-
-    cell.className = `cal-cell ${stateClass}`;
-    cell.innerHTML = `
-      <span class="cell-num">${date.getDate()}</span>
-      <span class="cell-ramadan">${day}</span>
-    `;
-
-    if (!isFuture) {
-      cell.addEventListener('click', () => openDetail(day));
-    }
-
+    cell.className = `cal-cell ${date.getTime() === today.getTime() ? 'today' : ''}`;
+    cell.innerHTML = `<span style="font-size: 0.8rem;">${date.getDate()}</span><span style="font-size: 0.6rem; color: var(--teal-light)">J${day}</span>`;
+    
+    cell.onclick = () => {
+        if (day <= (getRamadanDay(new Date()) || 0) || true) { // Autorise tout pour test
+            showDetail(day);
+        }
+    };
     grid.appendChild(cell);
   }
 }
 
-function openDetail(day) {
-  currentDetailDay = day;
-  const s = SURAHS[day - 1];
-  const date = getDateForRamadanDay(day);
-
-  document.getElementById('detailDayBadge').textContent = `Jour ${day} du Ramadan`;
-  document.getElementById('detailSurahNum').textContent = `Sourate n° ${s.num}`;
-  document.getElementById('detailSurahName').textContent = s.name;
-  document.getElementById('detailSurahArabic').textContent = s.arabic;
-  document.getElementById('detailSurahMeta').textContent = `${s.meaning} · ${s.meta} · ${date.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' })}`;
-  document.getElementById('verseArabic').textContent = s.verse.ar;
-  document.getElementById('verseFrench').textContent = s.verse.fr;
-  document.getElementById('verseRef').textContent = s.verse.ref;
-  document.getElementById('detailContext').textContent = s.context;
-  document.getElementById('detailThemes').textContent = s.themes;
-  document.getElementById('detailReflection').textContent = s.reflection;
-
-  const grid = document.getElementById('lessonsGrid');
-  grid.innerHTML = s.lessons.map(l => `
-    <div class="lesson-pill">
-      <div class="lesson-icon">${l.icon}</div>
-      <div class="lesson-text">${l.text}</div>
-    </div>
-  `).join('');
-
-  const prevDayDate = day > 1 ? getDateForRamadanDay(day - 1) : null;
-  const nextDayDate = day < RAMADAN_DAYS ? getDateForRamadanDay(day + 1) : null;
-  document.getElementById('prevBtn').classList.toggle('disabled', !prevDayDate || prevDayDate > today);
-  document.getElementById('nextBtn').classList.toggle('disabled', !nextDayDate || nextDayDate > today);
-
-  document.getElementById('home').classList.add('hidden');
-  const det = document.getElementById('detail');
-  det.classList.remove('hidden');
-  det.scrollTop = 0;
-
-  det.querySelectorAll('.anim').forEach(el => {
-    el.style.animation = 'none';
-    el.offsetHeight; 
-    el.style.animation = '';
-  });
+function showDetail(day) {
+    const s = SURAHS[day-1] || SURAHS[0];
+    document.getElementById('detailSurahNameLarge').textContent = s.name;
+    document.getElementById('detailText').textContent = s.context;
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('detail').classList.remove('hidden');
 }
 
 function goHome() {
-  document.getElementById('detail').classList.add('hidden');
-  document.getElementById('home').classList.remove('hidden');
+    document.getElementById('detail').classList.add('hidden');
+    document.getElementById('home').classList.remove('hidden');
 }
 
-function navigateDay(dir) {
-  if (!currentDetailDay) return;
-  const next = currentDetailDay + dir;
-  if (next < 1 || next > RAMADAN_DAYS) return;
-  const nextDate = getDateForRamadanDay(next);
-  if (nextDate > today) return;
-  openDetail(next);
-}
-
-updateTodayCard();
-buildCalendar();
+// Initialisation
+window.onload = () => {
+  buildCalendar();
+  fetchSolarTimes();
+  
+  // Update header card
+  const day = getRamadanDay(new Date());
+  if(day) {
+      document.getElementById('todayNum').textContent = day;
+      document.getElementById('todaySurahName').textContent = SURAHS[day-1].name;
+      document.getElementById('todaySurahArabic').textContent = SURAHS[day-1].arabic;
+  }
+};
 </script>
+
 </body>
 </html>
