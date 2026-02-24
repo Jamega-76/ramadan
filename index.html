@@ -1490,19 +1490,35 @@ function fmtMinutes(totalMinutes) {
 }
 
 function updateSunArc(sunriseDate, sunsetDate) {
-  const now = new Date();
-  const riseMs = sunriseDate.getTime();
-  const setMs  = sunsetDate.getTime();
-  const dayDuration = setMs - riseMs;
+  // Les dates de l'API sont en UTC mais new Date() les parse correctement en ms epoch
+  // => la comparaison avec now (aussi en ms epoch) est directement correcte
+  const nowMs   = Date.now();
+  const riseMs  = sunriseDate.getTime();
+  const setMs   = sunsetDate.getTime();
+  const dayMs   = setMs - riseMs;
+
   let pct = 0;
-  if (now < sunriseDate) pct = 0;
-  else if (now > sunsetDate) pct = 100;
-  else pct = ((now - riseMs) / dayDuration) * 100;
+  if (nowMs <= riseMs)     pct = 0;
+  else if (nowMs >= setMs) pct = 100;
+  else                     pct = Math.round(((nowMs - riseMs) / dayMs) * 1000) / 10;
 
   const fill   = document.getElementById('sunFill');
   const cursor = document.getElementById('sunCursor');
-  if (fill)   fill.style.width  = pct + '%';
+  if (fill)   fill.style.width = pct + '%';
   if (cursor) cursor.style.left = pct + '%';
+
+  // Mettre à jour le label central avec l'heure actuelle
+  const arcCenter = document.querySelector('.sun-progress-label span:nth-child(2)');
+  if (arcCenter) {
+    const nowLocal = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    if (nowMs > riseMs && nowMs < setMs) {
+      arcCenter.textContent = '🔆 ' + nowLocal;
+    } else if (nowMs < riseMs) {
+      arcCenter.textContent = 'Avant le lever';
+    } else {
+      arcCenter.textContent = 'Après le coucher';
+    }
+  }
 }
 
 async function reverseGeocode(lat, lon) {
@@ -1569,7 +1585,7 @@ async function initSunWidget() {
 
       updateSunArc(sunriseDate, sunsetDate);
       // refresh arc every minute
-      setInterval(() => updateSunArc(sunriseDate, sunsetDate), 60000);
+      setInterval(() => updateSunArc(sunriseDate, sunsetDate), 30000);
 
     } catch (e) {
       showSunError('Impossible de charger les horaires');
