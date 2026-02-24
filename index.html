@@ -83,14 +83,17 @@
       flex-direction: column;
       align-items: center;
       min-height: 100%;
-      padding: 0 0 40px;
+      padding: 0 0 48px;
+      width: 100%;
+      overflow-x: hidden;
     }
 
     /* ── HEADER ── */
     .header {
       width: 100%;
       text-align: center;
-      padding: 48px 24px 28px;
+      padding: clamp(32px, 8vw, 48px) 16px 24px;
+      padding-top: max(clamp(32px, 8vw, 48px), env(safe-area-inset-top, 32px));
       position: relative;
     }
 
@@ -149,19 +152,21 @@
 
     /* ── TODAY CARD ── */
     .today-card {
-      margin: 0 20px 24px;
+      margin: 0 16px 16px;
       background: linear-gradient(135deg, rgba(15,107,107,0.4) 0%, rgba(26,158,143,0.25) 100%);
       border: 1px solid rgba(201,168,76,0.35);
-      border-radius: 20px;
-      padding: 20px 24px;
+      border-radius: 18px;
+      padding: 16px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: calc(100% - 40px);
+      gap: 12px;
+      width: calc(100% - 32px);
       max-width: 460px;
       box-shadow: 0 0 30px rgba(15,107,107,0.2), inset 0 0 20px rgba(201,168,76,0.05);
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .today-card::before {
@@ -172,50 +177,66 @@
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
 
+    .today-left {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+
     .today-left .label {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--teal-light);
       margin-bottom: 4px;
+      white-space: nowrap;
     }
 
     .today-left .day-num {
       font-family: 'Cinzel', serif;
-      font-size: 1.9rem;
+      font-size: clamp(1.4rem, 7vw, 1.9rem);
       font-weight: 600;
       color: var(--gold-light);
       line-height: 1;
     }
 
     .today-left .day-name {
-      font-size: 0.8rem;
+      font-size: clamp(0.65rem, 2.5vw, 0.8rem);
       color: var(--text-dim);
       margin-top: 4px;
       font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
     }
 
     .today-right {
       text-align: right;
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .today-right .surah-num {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
       color: var(--teal-light);
       text-transform: uppercase;
       margin-bottom: 3px;
+      white-space: nowrap;
     }
 
     .today-right .surah-name {
       font-family: 'Cinzel', serif;
-      font-size: 1rem;
+      font-size: clamp(0.8rem, 3.5vw, 1rem);
       color: var(--gold-pale);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .today-right .surah-arabic {
       font-family: 'Amiri', serif;
-      font-size: 1.1rem;
+      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
       color: var(--gold);
       margin-top: 3px;
     }
@@ -236,9 +257,10 @@
 
     /* ── CALENDAR ── */
     .calendar-wrap {
-      width: calc(100% - 40px);
+      width: calc(100% - 32px);
       max-width: 460px;
-      margin: 0 20px;
+      margin: 0 16px;
+      box-sizing: border-box;
     }
 
     .cal-month-header {
@@ -373,8 +395,8 @@
 
     /* ── FOOTER VERSE ── */
     .footer-verse {
-      margin: 28px 20px 0;
-      width: calc(100% - 40px);
+      margin: 24px 16px 0;
+      width: calc(100% - 32px);
       max-width: 460px;
       text-align: center;
       padding: 20px;
@@ -666,15 +688,16 @@
 
     /* ── SUN WIDGET ── */
     .sun-widget {
-      margin: 0 20px 24px;
-      width: calc(100% - 40px);
+      margin: 0 16px 16px;
+      width: calc(100% - 32px);
       max-width: 460px;
       background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(15,107,107,0.18) 100%);
       border: 1px solid rgba(201,168,76,0.22);
       border-radius: 18px;
-      padding: 16px 20px;
+      padding: 14px 16px;
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .sun-widget::before {
@@ -689,67 +712,81 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: nowrap;
     }
 
     .sun-location {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
+      gap: 5px;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--teal-light);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .sun-location-name {
       color: var(--text-dim);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-style: italic;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
       text-transform: none;
-      max-width: 180px;
-      white-space: nowrap;
+      text-align: right;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .sun-times {
       display: grid;
       grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
-      gap: 0;
       align-items: center;
+      gap: 0;
+      width: 100%;
     }
 
     .sun-divider {
       width: 1px;
-      height: 36px;
+      height: 32px;
       background: rgba(255,255,255,0.1);
+      justify-self: center;
     }
 
     .sun-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      padding: 6px 4px;
+      gap: 3px;
+      padding: 4px 2px;
+      min-width: 0;
     }
 
-    .sun-icon { font-size: 1.1rem; line-height: 1; }
+    .sun-icon {
+      font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+      line-height: 1;
+    }
 
     .sun-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
+      font-size: clamp(0.48rem, 1.6vw, 0.58rem);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-dim);
+      white-space: nowrap;
     }
 
     .sun-time {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
+      font-size: clamp(0.72rem, 2.8vw, 0.9rem);
       font-weight: 600;
       color: var(--gold-light);
       line-height: 1;
+      white-space: nowrap;
     }
 
     .sun-time.loading {
@@ -767,7 +804,7 @@
 
     .sun-arc {
       position: relative;
-      height: 8px;
+      height: 7px;
       margin: 12px 0 4px;
       background: rgba(255,255,255,0.06);
       border-radius: 4px;
@@ -786,7 +823,7 @@
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 14px; height: 14px;
+      width: 13px; height: 13px;
       background: var(--gold-light);
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(232,201,110,0.9);
@@ -797,10 +834,10 @@
     .sun-progress-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.58rem;
+      font-size: clamp(0.5rem, 1.8vw, 0.58rem);
       color: var(--text-dim);
-      letter-spacing: 0.08em;
-      margin-top: 6px;
+      letter-spacing: 0.05em;
+      margin-top: 5px;
     }
 
     .geo-error {
