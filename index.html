@@ -971,6 +971,186 @@
       text-underline-offset: 3px;
     }
 
+    /* ── INSTALL PROMPT ── */
+    .install-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(5, 15, 25, 0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .install-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .install-card {
+      background: linear-gradient(160deg, #0d2f3f 0%, #0a1e2a 60%, #0d2233 100%);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 24px;
+      padding: 32px 28px 28px;
+      text-align: center;
+      max-width: 340px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 0 60px rgba(15,107,107,0.35), 0 0 0 1px rgba(201,168,76,0.1);
+      transform: translateY(24px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .install-overlay.visible .install-card {
+      transform: translateY(0) scale(1);
+    }
+
+    /* top gold line */
+    .install-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 40px; right: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border-radius: 2px;
+    }
+
+    .install-icon-wrap {
+      width: 88px; height: 88px;
+      margin: 0 auto 20px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid rgba(201,168,76,0.35);
+      box-shadow: 0 0 24px rgba(201,168,76,0.2);
+    }
+    .install-icon-wrap img {
+      width: 100%; height: 100%;
+      display: block;
+    }
+
+    .install-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .install-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 14px;
+    }
+
+    .install-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .install-btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(15,107,107,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .install-btn-primary:hover, .install-btn-primary:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(15,107,107,0.7);
+    }
+
+    .install-btn-secondary {
+      width: 100%;
+      padding: 11px 20px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .install-btn-secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--text);
+    }
+
+    .install-ios-steps {
+      display: none;
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .install-ios-steps.show { display: block; }
+    .install-ios-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .install-ios-step:last-child { margin-bottom: 0; }
+    .install-ios-step .step-num {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-size: 0.65rem;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .install-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .install-ornament-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3));
+    }
+    .install-ornament-line:last-child {
+      background: linear-gradient(270deg, transparent, rgba(201,168,76,0.3));
+    }
+    .install-crescent { font-size: 1rem; }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -1083,6 +1263,47 @@
   <div class="footer-verse anim anim-5">
     <div class="arabic">شَهۡرُ رَمَضَانَ ٱلَّذِيٓ أُنزِلَ فِيهِ ٱلۡقُرۡءَانُ</div>
     <div class="translation">« Le mois de Ramadan est celui durant lequel le Coran a été révélé »<br/>— Al-Baqara : 185</div>
+  </div>
+</div>
+
+<!-- ══════════════ INSTALL PROMPT ══════════════ -->
+<div class="install-overlay" id="installOverlay">
+  <div class="install-card">
+    <div class="install-icon-wrap">
+      <img src="icon-192.png" alt="Ramadan 2026" />
+    </div>
+    <div class="install-ornament">
+      <div class="install-ornament-line"></div>
+      <span class="install-crescent">☽</span>
+      <div class="install-ornament-line"></div>
+    </div>
+    <div class="install-title">Ramadan 2026</div>
+    <div class="install-subtitle">1447 H · Sourates du jour</div>
+    <p class="install-desc">
+      Installez l'application pour accéder au calendrier et aux sourates du Ramadan, même hors connexion.
+    </p>
+    <button class="install-btn-primary" id="installBtnMain">
+      <span>📲</span>
+      <span id="installBtnLabel">Installer l'application</span>
+    </button>
+    <button class="install-btn-secondary" id="installBtnDismiss">
+      Continuer sans installer
+    </button>
+    <!-- iOS steps (shown only on iOS) -->
+    <div class="install-ios-steps" id="iosSteps">
+      <div class="install-ios-step">
+        <span class="step-num">1</span>
+        <span>Appuyez sur <strong style="color:var(--text)">Partager</strong> <span style="font-size:1rem">⬆️</span> en bas de Safari</span>
+      </div>
+      <div class="install-ios-step">
+        <span class="step-num">2</span>
+        <span>Faites défiler et choisissez <strong style="color:var(--text)">« Sur l'écran d'accueil »</strong></span>
+      </div>
+      <div class="install-ios-step">
+        <span class="step-num">3</span>
+        <span>Appuyez sur <strong style="color:var(--text)">Ajouter</strong> en haut à droite</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1573,6 +1794,9 @@ function openDetail(day) {
   document.getElementById('prevBtn').classList.toggle('disabled', !prevDayDate || prevDayDate > today);
   document.getElementById('nextBtn').classList.toggle('disabled', !nextDayDate || nextDayDate > today);
 
+  // Render full surah text
+  renderSurahFull(day);
+
   document.getElementById('home').classList.add('hidden');
   const det = document.getElementById('detail');
   det.classList.remove('hidden');
@@ -1737,11 +1961,535 @@ function showSunError(msg, allowRetry) {
 }
 
 // ────────────────────────────────────────
+
+// ════════════════════════════════════════
+// FULL SURAH TEXTS (traduction française)
+// ════════════════════════════════════════
+const FULL_SURAHS = {
+
+1: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", fr:"Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux." },
+    { n:2, ar:"ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", fr:"Louange à Allah, Seigneur de l'univers." },
+    { n:3, ar:"ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", fr:"Le Tout Miséricordieux, le Très Miséricordieux." },
+    { n:4, ar:"مَٰلِكِ يَوۡمِ ٱلدِّينِ", fr:"Maître du Jour de la rétribution." },
+    { n:5, ar:"إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ", fr:"C'est Toi [Seul] que nous adorons, et c'est Toi [Seul] dont nous implorons le secours." },
+    { n:6, ar:"ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ", fr:"Guide-nous dans le droit chemin." },
+    { n:7, ar:"صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ", fr:"le chemin de ceux que Tu as comblés de bienfaits, non pas celui des réprouvés, ni des égarés." }
+  ],
+  note: "Al-Fatiha est la sourate la plus récitée du Coran — 17 fois par jour dans la prière obligatoire. Elle est aussi appelée 'Umm al-Kitab' (la Mère du Livre) et 'As-Sab' al-Mathani' (les Sept versets répétés)."
+},
+
+2: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"الٓمٓ", fr:"Alif, Lam, Mim." },
+    { n:2, ar:"ذَٰلِكَ ٱلۡكِتَٰبُ لَا رَيۡبَۛ فِيهِۛ هُدٗى لِّلۡمُتَّقِينَ", fr:"C'est le Livre au sujet duquel il n'y a aucun doute, c'est un guide pour les pieux," },
+    { n:3, ar:"ٱلَّذِينَ يُؤۡمِنُونَ بِٱلۡغَيۡبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقۡنَٰهُمۡ يُنفِقُونَ", fr:"qui croient à l'invisible, accomplissent la prière et dépensent de ce que Nous leur avons attribué," },
+    { n:4, ar:"وَٱلَّذِينَ يُؤۡمِنُونَ بِمَآ أُنزِلَ إِلَيۡكَ وَمَآ أُنزِلَ مِن قَبۡلِكَ وَبِٱلۡأٓخِرَةِ هُمۡ يُوقِنُونَ", fr:"et qui croient à ce qui t'a été révélé et à ce qui a été révélé avant toi, et qui ont la certitude de l'au-delà." },
+    { n:5, ar:"أُوْلَٰٓئِكَ عَلَىٰ هُدٗى مِّن رَّبِّهِمۡۖ وَأُوْلَٰٓئِكَ هُمُ ٱلۡمُفۡلِحُونَ", fr:"Ceux-là sont sur le droit chemin de leur Seigneur, et ce sont eux les bienheureux." },
+    { n:255, ar:"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا نَوۡمٞۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٖ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ", fr:"[Verset du Trône] Allah ! Point de divinité à part Lui, le Vivant, Celui qui subsiste par lui-même. Ni somnolence ni sommeil ne Le saisissent. À Lui appartient tout ce qui est dans les cieux et sur la terre. Qui peut intercéder auprès de Lui sans Sa permission ? Il sait ce qui est devant eux et ce qui est derrière eux. Et ils n'embrassent de Sa science que ce qu'Il veut. Son Trône déborde les cieux et la terre, dont la garde ne Lui coûte aucune peine. Et Il est le Très Haut, le Très Grand." },
+    { n:286, ar:"لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ", fr:"Allah n'impose à aucune âme une charge au-delà de sa capacité. À chacun ce qu'il a acquis comme bien, et contre chacun ce qu'il a acquis comme mal. « Notre Seigneur, ne nous châtie pas si nous oublions ou si nous commettons une erreur. Notre Seigneur, ne fais pas peser sur nous une charge lourde comme Tu en as chargé ceux d'avant nous. Notre Seigneur, ne nous impose pas ce que nous n'avons pas la force de porter. Efface nos fautes, pardonne-nous et fais-nous miséricorde. Tu es notre Maître. Donne-nous la victoire sur les gens mécréants. »" }
+  ],
+  note: "Al-Baqara compte 286 versets. Seuls les versets les plus emblématiques sont présentés ici, dont le célèbre Verset du Trône (v.255) — le plus grand verset du Coran selon le Prophète ﷺ — et le verset final, une supplication sublime."
+},
+
+3: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"الٓمٓ", fr:"Alif, Lam, Mim." },
+    { n:2, ar:"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُ", fr:"Allah ! Point de divinité à part Lui, le Vivant, Celui qui subsiste par lui-même." },
+    { n:3, ar:"نَزَّلَ عَلَيۡكَ ٱلۡكِتَٰبَ بِٱلۡحَقِّ مُصَدِّقٗا لِّمَا بَيۡنَ يَدَيۡهِ وَأَنزَلَ ٱلتَّوۡرَىٰةَ وَٱلۡإِنجِيلَ", fr:"Il t'a révélé le Livre avec la Vérité, confirmant ce qui existait avant lui. Et Il a révélé la Torah et l'Évangile," },
+    { n:31, ar:"قُلۡ إِن كُنتُمۡ تُحِبُّونَ ٱللَّهَ فَٱتَّبِعُونِي يُحۡبِبۡكُمُ ٱللَّهُ وَيَغۡفِرۡ لَكُمۡ ذُنُوبَكُمۡۗ وَٱللَّهُ غَفُورٞ رَّحِيمٞ", fr:"Dis [Muhammad] : « Si vous aimez Allah, suivez-moi, Allah vous aimera alors et vous pardonnera vos péchés. Allah est Grand Pardonneur et Très Miséricordieux. »" },
+    { n:102, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱتَّقُواْ ٱللَّهَ حَقَّ تُقَاتِهِۦ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسۡلِمُونَ", fr:"Ô vous qui avez cru, craignez Allah comme Il doit être craint, et ne mourez qu'en étant soumis [à Lui]." },
+    { n:133, ar:"۞ وَسَارِعُوٓاْ إِلَىٰ مَغۡفِرَةٖ مِّن رَّبِّكُمۡ وَجَنَّةٍ عَرۡضُهَا ٱلسَّمَٰوَٰتُ وَٱلۡأَرۡضُ أُعِدَّتۡ لِلۡمُتَّقِينَ", fr:"Et hâtez-vous vers le pardon de votre Seigneur et vers un Paradis aussi large que les cieux et la terre, préparé pour les pieux." },
+    { n:190, ar:"إِنَّ فِي خَلۡقِ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَٱخۡتِلَٰفِ ٱلَّيۡلِ وَٱلنَّهَارِ لَأٓيَٰتٖ لِّأُوْلِي ٱلۡأَلۡبَٰبِ", fr:"Certes, dans la création des cieux et de la terre, et dans l'alternance de la nuit et du jour, il y a des signes pour les doués d'intelligence," },
+    { n:200, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱصۡبِرُواْ وَصَابِرُواْ وَرَابِطُواْ وَٱتَّقُواْ ٱللَّهَ لَعَلَّكُمۡ تُفۡلِحُونَ", fr:"Ô vous qui avez cru ! Endurez, et rivalisez d'endurance, et restez attachés [à Allah], et craignez Allah, afin que vous réussissiez." }
+  ],
+  note: "Al-Imran compte 200 versets. Les versets les plus essentiels sont présentés ici, couvrant les grands thèmes : l'unité d'Allah, l'amour du Prophète ﷺ, la Taqwa, et la réflexion sur la Création."
+},
+
+4: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُواْ رَبَّكُمُ ٱلَّذِي خَلَقَكُم مِّن نَّفۡسٖ وَٰحِدَةٖ وَخَلَقَ مِنۡهَا زَوۡجَهَا وَبَثَّ مِنۡهُمَا رِجَالٗا كَثِيرٗا وَنِسَآءٗۚ وَٱتَّقُواْ ٱللَّهَ ٱلَّذِي تَسَآءَلُونَ بِهِۦ وَٱلۡأَرۡحَامَۚ إِنَّ ٱللَّهَ كَانَ عَلَيۡكُمۡ رَقِيبٗا", fr:"Ô gens ! Craignez votre Seigneur qui vous a créés d'une seule personne. Il a créé de celle-ci son épouse et Il a fait, de ces deux-là, beaucoup d'hommes et de femmes. Craignez Allah au nom duquel vous vous demandez des droits mutuels, et [craignez] de rompre les liens du sang. Certes, Allah vous observe continuellement." },
+    { n:36, ar:"وَٱعۡبُدُواْ ٱللَّهَ وَلَا تُشۡرِكُواْ بِهِۦ شَيۡـٔٗاۖ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنٗا وَبِذِي ٱلۡقُرۡبَىٰ وَٱلۡيَتَٰمَىٰ وَٱلۡمَسَٰكِينِ", fr:"Et adorez Allah sans Lui associer quoi que ce soit. Et agissez bien envers les pères et mères, les proches, les orphelins, les pauvres," },
+    { n:58, ar:"إِنَّ ٱللَّهَ يَأۡمُرُكُمۡ أَن تُؤَدُّواْ ٱلۡأَمَٰنَٰتِ إِلَىٰٓ أَهۡلِهَا وَإِذَا حَكَمۡتُم بَيۡنَ ٱلنَّاسِ أَن تَحۡكُمُواْ بِٱلۡعَدۡلِۚ", fr:"Allah vous commande de rendre les dépôts à leurs propriétaires et, quand vous jugez entre des gens, de juger avec équité." },
+    { n:135, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُونُواْ قَوَّٰمِينَ بِٱلۡقِسۡطِ شُهَدَآءَ لِلَّهِ وَلَوۡ عَلَىٰٓ أَنفُسِكُمۡ أَوِ ٱلۡوَٰلِدَيۡنِ وَٱلۡأَقۡرَبِينَ", fr:"Ô vous qui avez cru ! Soyez de fervents défenseurs de la justice, témoins de par Allah, fût-ce contre vous-mêmes, contre vos père et mère ou vos proches." },
+    { n:176, ar:"يَسۡتَفۡتُونَكَ قُلِ ٱللَّهُ يُفۡتِيكُمۡ فِي ٱلۡكَلَٰلَةِ", fr:"Ils te demandent de te prononcer. Dis : « Allah vous donne une décision au sujet des parents sans enfants ni ascendants. »" }
+  ],
+  note: "An-Nisa compte 176 versets. Cette sélection présente les versets fondateurs sur la famille, la justice et l'équité qui sont au cœur de cette sourate révolutionnaire pour son époque."
+},
+
+5: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ أَوۡفُواْ بِٱلۡعُقُودِ", fr:"Ô vous qui avez cru ! Remplissez vos engagements." },
+    { n:2, ar:"وَتَعَاوَنُواْ عَلَى ٱلۡبِرِّ وَٱلتَّقۡوَىٰۖ وَلَا تَعَاوَنُواْ عَلَى ٱلۡإِثۡمِ وَٱلۡعُدۡوَٰنِۚ وَٱتَّقُواْ ٱللَّهَۖ إِنَّ ٱللَّهَ شَدِيدُ ٱلۡعِقَابِ", fr:"Entraidez-vous dans l'accomplissement des bonnes œuvres et de la piété et n'aidez pas dans le péché et la transgression. Et craignez Allah, car Allah est sévère en punition." },
+    { n:3, ar:"ٱلۡيَوۡمَ أَكۡمَلۡتُ لَكُمۡ دِينَكُمۡ وَأَتۡمَمۡتُ عَلَيۡكُمۡ نِعۡمَتِي وَرَضِيتُ لَكُمُ ٱلۡإِسۡلَٰمَ دِينٗاۚ", fr:"Aujourd'hui J'ai parachevé pour vous votre religion, et accompli sur vous Mon bienfait. Et J'agrée l'Islam comme religion pour vous." },
+    { n:8, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ كُونُواْ قَوَّٰمِينَ لِلَّهِ شُهَدَآءَ بِٱلۡقِسۡطِۖ وَلَا يَجۡرِمَنَّكُمۡ شَنَـَٔانُ قَوۡمٍ عَلَىٰٓ أَلَّا تَعۡدِلُواْۚ ٱعۡدِلُواْ هُوَ أَقۡرَبُ لِلتَّقۡوَىٰ", fr:"Ô vous qui avez cru ! Soyez stricts pour Allah en témoignant équitablement. Que la haine d'un peuple ne vous incite pas à être injustes. Soyez équitables, c'est plus proche de la piété." },
+    { n:32, ar:"مَن قَتَلَ نَفۡسَۢا بِغَيۡرِ نَفۡسٍ أَوۡ فَسَادٖ فِي ٱلۡأَرۡضِ فَكَأَنَّمَا قَتَلَ ٱلنَّاسَ جَمِيعٗا وَمَنۡ أَحۡيَاهَا فَكَأَنَّمَآ أَحۡيَا ٱلنَّاسَ جَمِيعٗا", fr:"Quiconque tuerait une personne non coupable d'un meurtre ou d'une corruption sur la terre, c'est comme s'il avait tué tous les hommes. Et quiconque lui fait don de la vie, c'est comme s'il faisait don de la vie à tous les hommes." },
+    { n:120, ar:"لِلَّهِ مُلۡكُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَمَا فِيهِنَّۚ وَهُوَ عَلَىٰ كُلِّ شَيۡءٖ قَدِيرُۢ", fr:"À Allah appartient la royauté des cieux, de la terre et de tout ce qu'ils renferment. Et Il est Omnipotent." }
+  ],
+  note: "Al-Ma'ida compte 120 versets. L'un des plus remarquables du Coran est le verset 32 qui enseigne le caractère sacré de toute vie humaine : tuer un innocent équivaut à tuer toute l'humanité."
+},
+
+6: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِي خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ وَجَعَلَ ٱلظُّلُمَٰتِ وَٱلنُّورَۖ", fr:"Louange à Allah qui a créé les cieux et la terre et établi les ténèbres et la lumière." },
+    { n:59, ar:"وَعِندَهُۥ مَفَاتِحُ ٱلۡغَيۡبِ لَا يَعۡلَمُهَآ إِلَّا هُوَۚ وَيَعۡلَمُ مَا فِي ٱلۡبَرِّ وَٱلۡبَحۡرِۚ وَمَا تَسۡقُطُ مِن وَرَقَةٍ إِلَّا يَعۡلَمُهَا", fr:"Auprès de Lui sont les clés de l'Inconnaissable ; nul autre que Lui ne les connaît. Il connaît ce qui est dans la terre et dans la mer. Pas une feuille ne tombe qu'Il ne le sache." },
+    { n:75, ar:"وَكَذَٰلِكَ نُرِيٓ إِبۡرَٰهِيمَ مَلَكُوتَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَلِيَكُونَ مِنَ ٱلۡمُوقِنِينَ", fr:"Et ainsi, Nous montrâmes à Ibrahim le Royaume des cieux et de la terre, afin qu'il soit parmi ceux qui ont la certitude." },
+    { n:103, ar:"لَّا تُدۡرِكُهُ ٱلۡأَبۡصَٰرُ وَهُوَ يُدۡرِكُ ٱلۡأَبۡصَٰرَۖ وَهُوَ ٱللَّطِيفُ ٱلۡخَبِيرُ", fr:"Les yeux ne peuvent L'atteindre, mais Il saisit tous les regards. Il est le Subtil, le Parfaitement Connaisseur." },
+    { n:162, ar:"قُلۡ إِنَّ صَلَاتِي وَنُسُكِي وَمَحۡيَايَ وَمَمَاتِي لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", fr:"Dis : « Ma prière, mon sacrifice, ma vie et ma mort appartiennent à Allah, Seigneur de l'univers." },
+    { n:165, ar:"وَهُوَ ٱلَّذِي جَعَلَكُمۡ خَلَٰٓئِفَ ٱلۡأَرۡضِ وَرَفَعَ بَعۡضَكُمۡ فَوۡقَ بَعۡضٖ دَرَجَٰتٖ لِّيَبۡلُوَكُمۡ فِي مَآ ءَاتَىٰكُمۡ", fr:"C'est Lui qui vous a établis comme successeurs sur la terre et Il a élevé certains d'entre vous au-dessus des autres en degrés, afin de vous éprouver en ce qu'Il vous a donné." }
+  ],
+  note: "Al-An'am compte 165 versets. Le verset 162 — 'Ma prière, mon sacrifice, ma vie et ma mort appartiennent à Allah' — est récité lors du sacrifice de l'Aïd. C'est l'une des plus belles déclarations de foi du Coran."
+},
+
+7: {
+  basmala: true,
+  verses: [
+    { n:11, ar:"وَلَقَدۡ خَلَقۡنَٰكُمۡ ثُمَّ صَوَّرۡنَٰكُمۡ ثُمَّ قُلۡنَا لِلۡمَلَٰٓئِكَةِ ٱسۡجُدُواْ لِأٓدَمَ فَسَجَدُوٓاْ إِلَّآ إِبۡلِيسَ لَمۡ يَكُن مِّنَ ٱلسَّٰجِدِينَ", fr:"Nous vous avons certes créés, puis formés, puis Nous avons dit aux Anges : « Prosternez-vous devant Adam. » Ils se prosternèrent tous, sauf Iblis qui ne fut pas de ceux qui se prosternèrent." },
+    { n:23, ar:"قَالَا رَبَّنَا ظَلَمۡنَآ أَنفُسَنَا وَإِن لَّمۡ تَغۡفِرۡ لَنَا وَتَرۡحَمۡنَا لَنَكُونَنَّ مِنَ ٱلۡخَٰسِرِينَ", fr:"[Adam et Ève] dirent : « Notre Seigneur, nous nous sommes fait du tort à nous-mêmes. Si Tu ne nous pardonnes pas et ne nous fais pas miséricorde, nous serons certes du nombre des perdants. »" },
+    { n:54, ar:"إِنَّ رَبَّكُمُ ٱللَّهُ ٱلَّذِي خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ فِي سِتَّةِ أَيَّامٖ ثُمَّ ٱسۡتَوَىٰ عَلَى ٱلۡعَرۡشِ يُغۡشِي ٱلَّيۡلَ ٱلنَّهَارَ يَطۡلُبُهُۥ حَثِيثٗا", fr:"Certes, votre Seigneur est Allah qui a créé les cieux et la terre en six jours, puis S'est établi sur le Trône. Il couvre le jour avec la nuit qui le suit rapidement." },
+    { n:156, ar:"وَرَحۡمَتِي وَسِعَتۡ كُلَّ شَيۡءٖۚ فَسَأَكۡتُبُهَا لِلَّذِينَ يَتَّقُونَ", fr:"« Ma miséricorde embrasse toute chose. Je l'accorderai à ceux qui sont pieux. »" },
+    { n:199, ar:"خُذِ ٱلۡعَفۡوَ وَأۡمُرۡ بِٱلۡعُرۡفِ وَأَعۡرِضۡ عَنِ ٱلۡجَٰهِلِينَ", fr:"Sois indulgent ; ordonne ce qui est convenable et éloigne-toi des ignorants." }
+  ],
+  note: "Al-A'raf compte 206 versets. La prière d'Adam et Ève (v.23) après leur erreur est un modèle de repentir sincère. Et le verset 156 — 'Ma miséricorde embrasse toute chose' — est l'une des plus grandes déclarations d'espoir du Coran."
+},
+
+8: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"يَسۡـَٔلُونَكَ عَنِ ٱلۡأَنفَالِۖ قُلِ ٱلۡأَنفَالُ لِلَّهِ وَٱلرَّسُولِۖ فَٱتَّقُواْ ٱللَّهَ وَأَصۡلِحُواْ ذَاتَ بَيۡنِكُمۡۖ وَأَطِيعُواْ ٱللَّهَ وَرَسُولَهُۥٓ إِن كُنتُم مُّؤۡمِنِينَ", fr:"Ils t'interrogent sur les butins de guerre. Dis : « Les butins sont à Allah et au Messager. Craignez donc Allah et réglez vos différends. Et obéissez à Allah et à Son messager, si vous êtes croyants. »" },
+    { n:2, ar:"إِنَّمَا ٱلۡمُؤۡمِنُونَ ٱلَّذِينَ إِذَا ذُكِرَ ٱللَّهُ وَجِلَتۡ قُلُوبُهُمۡ وَإِذَا تُلِيَتۡ عَلَيۡهِمۡ ءَايَٰتُهُۥ زَادَتۡهُمۡ إِيمَٰنٗا وَعَلَىٰ رَبِّهِمۡ يَتَوَكَّلُونَ", fr:"Les vrais croyants sont ceux dont les cœurs frémissent quand on mentionne Allah, et dont la foi s'accroît quand on leur récite Ses versets, et qui font confiance à leur Seigneur." },
+    { n:45, ar:"يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓاْ إِذَا لَقِيتُمۡ فِئَةٗ فَٱثۡبُتُواْ وَٱذۡكُرُواْ ٱللَّهَ كَثِيرٗا لَّعَلَّكُمۡ تُفۡلِحُونَ", fr:"Ô vous qui avez cru ! Quand vous rencontrez une troupe [ennemie], tenez ferme et invoquez beaucoup Allah, afin que vous réussissiez." },
+    { n:62, ar:"وَإِن يُرِيدُوٓاْ أَن يَخۡدَعُوكَ فَإِنَّ حَسۡبَكَ ٱللَّهُۚ هُوَ ٱلَّذِيٓ أَيَّدَكَ بِنَصۡرِهِۦ وَبِٱلۡمُؤۡمِنِينَ", fr:"Et s'ils veulent te tromper, alors Allah te suffit. C'est Lui qui t'a soutenu de Son aide et par les croyants." },
+    { n:72, ar:"إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَواْ وَّٱلَّذِينَ هُم مُّحۡسِنُونَ", fr:"Certes, Allah est avec ceux qui Le craignent et ceux qui font le bien." }
+  ],
+  note: "Al-Anfal compte 75 versets. Le verset 2 donne la définition coranique du vrai croyant : celui dont le cœur frémit à la mention d'Allah. Une mesure intérieure, subjective et profonde de la foi."
+},
+
+9: {
+  basmala: false,
+  verses: [
+    { n:40, ar:"إِلَّا تَنصُرُوهُ فَقَدۡ نَصَرَهُ ٱللَّهُ إِذۡ أَخۡرَجَهُ ٱلَّذِينَ كَفَرُواْ ثَانِيَ ٱثۡنَيۡنِ إِذۡ هُمَا فِي ٱلۡغَارِ إِذۡ يَقُولُ لِصَٰحِبِهِۦ لَا تَحۡزَنۡ إِنَّ ٱللَّهَ مَعَنَا", fr:"Si vous ne l'aidez pas [Muhammad], Allah l'a certes déjà aidé, quand les mécréants l'expulsèrent — un des deux [compagnons] dans la grotte — quand il dit à son compagnon : « Ne t'afflige pas, car Allah est avec nous. »" },
+    { n:71, ar:"وَٱلۡمُؤۡمِنُونَ وَٱلۡمُؤۡمِنَٰتُ بَعۡضُهُمۡ أَوۡلِيَآءُ بَعۡضٖۚ يَأۡمُرُونَ بِٱلۡمَعۡرُوفِ وَيَنۡهَوۡنَ عَنِ ٱلۡمُنكَرِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَيُؤۡتُونَ ٱلزَّكَوٰةَ وَيُطِيعُونَ ٱللَّهَ وَرَسُولَهُۥٓ", fr:"Les croyants et les croyantes sont alliés les uns des autres. Ils commandent le bien, interdisent le mal, accomplissent la prière, acquittent la zakat, et obéissent à Allah et à Son Messager." },
+    { n:103, ar:"خُذۡ مِنۡ أَمۡوَٰلِهِمۡ صَدَقَةٗ تُطَهِّرُهُمۡ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيۡهِمۡۖ إِنَّ صَلَوٰتَكَ سَكَنٞ لَّهُمۡۗ", fr:"Prélève de leurs biens une aumône par laquelle tu les purifies et les nettoies, et prie pour eux. Ta prière est vraiment une quiétude pour eux." },
+    { n:104, ar:"أَلَمۡ يَعۡلَمُوٓاْ أَنَّ ٱللَّهَ هُوَ يَقۡبَلُ ٱلتَّوۡبَةَ عَنۡ عِبَادِهِۦ وَيَأۡخُذُ ٱلصَّدَقَٰتِ وَأَنَّ ٱللَّهَ هُوَ ٱلتَّوَّابُ ٱلرَّحِيمُ", fr:"Ne savent-ils pas que c'est Allah qui accepte le repentir de Ses serviteurs et qui reçoit les aumônes, et qu'Allah est le Grand Repentant, le Très Miséricordieux ?" },
+    { n:129, ar:"فَإِن تَوَلَّوۡاْ فَقُلۡ حَسۡبِيَ ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَۖ عَلَيۡهِ تَوَكَّلۡتُۖ وَهُوَ رَبُّ ٱلۡعَرۡشِ ٱلۡعَظِيمِ", fr:"Alors, s'ils se détournent, dis : « Allah me suffit. Pas de divinité sauf Lui. En Lui je place ma confiance. Et Il est le Seigneur du Trône immense. »" }
+  ],
+  note: "At-Tawba est la seule sourate sans Basmala. Le verset 40 — 'Ne t'afflige pas, car Allah est avec nous' — est la parole du Prophète ﷺ à Abu Bakr dans la Grotte de Thawr. Le verset 129 'Hasbiyallah' est une des plus puissantes formules de confiance en Allah."
+},
+
+10: {
+  basmala: true,
+  verses: [
+    { n:3, ar:"إِنَّ رَبَّكُمُ ٱللَّهُ ٱلَّذِي خَلَقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَ فِي سِتَّةِ أَيَّامٖ ثُمَّ ٱسۡتَوَىٰ عَلَى ٱلۡعَرۡشِۖ يُدَبِّرُ ٱلۡأَمۡرَۚ", fr:"Certes, votre Seigneur est Allah qui a créé les cieux et la terre en six jours, puis S'est établi sur le Trône pour administrer toute chose." },
+    { n:62, ar:"أَلَآ إِنَّ أَوۡلِيَآءَ ٱللَّهِ لَا خَوۡفٌ عَلَيۡهِمۡ وَلَا هُمۡ يَحۡزَنُونَ", fr:"En vérité, les proches d'Allah n'éprouvent aucune crainte et ne s'attristent pas." },
+    { n:63, ar:"ٱلَّذِينَ ءَامَنُواْ وَكَانُواْ يَتَّقُونَ", fr:"Ce sont ceux qui ont cru et qui étaient pieux." },
+    { n:87, ar:"وَأَوۡحَيۡنَآ إِلَىٰ مُوسَىٰ وَأَخِيهِ أَن تَبَوَّءَا لِقَوۡمِكُمَا بِمِصۡرَ بُيُوتٗا وَٱجۡعَلُواْ بُيُوتَكُمۡ قِبۡلَةٗ وَأَقِيمُواْ ٱلصَّلَوٰةَۗ وَبَشِّرِ ٱلۡمُؤۡمِنِينَ", fr:"Nous avons révélé à Moussa et à son frère : « Installez vos maisons en Égypte et faites de vos maisons des lieux d'adoration. Et accomplissez la prière. Et annonce la bonne nouvelle aux croyants. »" },
+    { n:107, ar:"وَإِن يَمۡسَسۡكَ ٱللَّهُ بِضُرّٖ فَلَا كَاشِفَ لَهُۥٓ إِلَّا هُوَۖ وَإِن يُرِدۡكَ بِخَيۡرٖ فَلَا رَآدَّ لِفَضۡلِهِۦۚ يُصِيبُ بِهِۦ مَن يَشَآءُ مِنۡ عِبَادِهِۦۚ وَهُوَ ٱلۡغَفُورُ ٱلرَّحِيمُ", fr:"Si Allah t'affecte d'un mal, nul autre que Lui ne peut l'enlever. Et s'Il te veut du bien, nul ne peut repousser Sa grâce. Il en fait bénéficier qui Il veut parmi Ses serviteurs. Et Il est le Tout Pardonneur, le Très Miséricordieux." }
+  ],
+  note: "Yunus compte 109 versets. Le verset 62-63 définit les 'Awliya' (proches d'Allah) : non pas des super-humains, mais simplement des croyants pieux. N'importe qui peut en faire partie."
+},
+
+11: {
+  basmala: true,
+  verses: [
+    { n:6, ar:"وَمَا مِن دَآبَّةٖ فِي ٱلۡأَرۡضِ إِلَّا عَلَى ٱللَّهِ رِزۡقُهَا وَيَعۡلَمُ مُسۡتَقَرَّهَا وَمُسۡتَوۡدَعَهَاۚ كُلٌّ فِي كِتَٰبٖ مُّبِينٖ", fr:"Il n'existe pas de bête sur terre dont Allah n'assure la subsistance. Il connaît son gîte et son dépôt. Tout est consigné dans un livre explicite." },
+    { n:112, ar:"فَٱسۡتَقِمۡ كَمَآ أُمِرۡتَ وَمَن تَابَ مَعَكَ وَلَا تَطۡغَوۡاْۚ إِنَّهُۥ بِمَا تَعۡمَلُونَ بَصِيرٞ", fr:"Sois donc droit comme il t'a été ordonné, et aussi ceux qui se sont repentis avec toi. Et ne transgressez pas. Il voit parfaitement ce que vous faites." },
+    { n:114, ar:"وَأَقِمِ ٱلصَّلَوٰةَ طَرَفَيِ ٱلنَّهَارِ وَزُلَفٗا مِّنَ ٱلَّيۡلِۚ إِنَّ ٱلۡحَسَنَٰتِ يُذۡهِبۡنَ ٱلسَّيِّـَٔاتِۚ ذَٰلِكَ ذِكۡرَىٰ لِلذَّٰكِرِينَ", fr:"Et accomplis la prière aux deux extrémités du jour et à certaines heures de la nuit. Les bonnes actions effacent les mauvaises. C'est un rappel pour ceux qui réfléchissent." },
+    { n:115, ar:"وَٱصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ", fr:"Et endure patiemment, car Allah ne laisse pas perdre la récompense des bienfaisants." },
+    { n:123, ar:"وَلِلَّهِ غَيۡبُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَإِلَيۡهِ يُرۡجَعُ ٱلۡأَمۡرُ كُلُّهُۥ فَٱعۡبُدۡهُ وَتَوَكَّلۡ عَلَيۡهِ", fr:"À Allah appartient l'invisible des cieux et de la terre, et c'est vers Lui que sera ramenée toute chose. Adore-Le donc et place en Lui ta confiance." }
+  ],
+  note: "Hud compte 123 versets. Le verset 6 — Allah assure la subsistance de toute bête sur terre — est une assurance divine absolue : si Allah nourrit les insectes et les oiseaux, Il pourvoit à tes besoins aussi."
+},
+
+12: {
+  basmala: true,
+  verses: [
+    { n:3, ar:"نَحۡنُ نَقُصُّ عَلَيۡكَ أَحۡسَنَ ٱلۡقَصَصِ بِمَآ أَوۡحَيۡنَآ إِلَيۡكَ هَٰذَا ٱلۡقُرۡءَانَ", fr:"Nous te racontons le meilleur des récits en te révélant ce Coran." },
+    { n:18, ar:"وَجَآءُو عَلَىٰ قَمِيصِهِۦ بِدَمٖ كَذِبٖۚ قَالَ بَلۡ سَوَّلَتۡ لَكُمۡ أَنفُسُكُمۡ أَمۡرٗاۖ فَصَبۡرٞ جَمِيلٞۖ وَٱللَّهُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ", fr:"Ils apportèrent sa chemise avec un faux sang. Il dit : « Mais c'est votre âme qui vous a rendu votre acte plaisant. Donc, belle patience ! C'est Allah qu'on implore contre ce que vous décrivez. »" },
+    { n:87, ar:"يَٰبَنِيَّ ٱذۡهَبُواْ فَتَحَسَّسُواْ مِن يُوسُفَ وَأَخِيهِ وَلَا تَاْيۡـَٔسُواْ مِن رَّوۡحِ ٱللَّهِۖ إِنَّهُۥ لَا يَاْيۡـَٔسُ مِن رَّوۡحِ ٱللَّهِ إِلَّا ٱلۡقَوۡمُ ٱلۡكَٰفِرُونَ", fr:"« Ô mes fils, allez chercher des nouvelles de Yusuf et de son frère. Et ne désespérez pas de la grâce d'Allah. Seuls les gens mécréants désespèrent de la grâce d'Allah. »" },
+    { n:90, ar:"قَالَ أَنَا۠ يُوسُفُ وَهَٰذَآ أَخِي قَدۡ مَنَّ ٱللَّهُ عَلَيۡنَآۖ إِنَّهُۥ مَن يَتَّقِ وَيَصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ", fr:"Il dit : « Je suis Yusuf, et voici mon frère. Allah nous a effectivement gratifiés de Ses bienfaits. Quiconque craint Allah et endure... Allah, certes, ne laisse pas perdre la récompense des bienfaisants. »" },
+    { n:92, ar:"قَالَ لَا تَثۡرِيبَ عَلَيۡكُمُ ٱلۡيَوۡمَۖ يَغۡفِرُ ٱللَّهُ لَكُمۡۖ وَهُوَ أَرۡحَمُ ٱلرَّٰحِمِينَ", fr:"Il dit : « Il n'y aura pas de reproche contre vous aujourd'hui. Qu'Allah vous pardonne ! Et Il est le plus Miséricordieux des miséricordieux. »" }
+  ],
+  note: "Yusuf compte 111 versets. Le pardon final de Yusuf envers ses frères (v.92) — après avoir été jeté dans un puits, vendu comme esclave, emprisonné — est l'un des actes les plus nobles de toute l'histoire coranique."
+},
+
+13: {
+  basmala: true,
+  verses: [
+    { n:11, ar:"لَهُۥ مُعَقِّبَٰتٞ مِّنۢ بَيۡنِ يَدَيۡهِ وَمِنۡ خَلۡفِهِۦ يَحۡفَظُونَهُۥ مِنۡ أَمۡرِ ٱللَّهِۗ إِنَّ ٱللَّهَ لَا يُغَيِّرُ مَا بِقَوۡمٍ حَتَّىٰ يُغَيِّرُواْ مَا بِأَنفُسِهِمۡۗ", fr:"Pour chaque être humain, il y a des gardiens qui se relaient, devant et derrière lui, le protégeant par l'ordre d'Allah. Allah ne modifie pas l'état d'un peuple tant que les membres de ce peuple ne modifient pas ce qui est en eux-mêmes." },
+    { n:13, ar:"وَيُسَبِّحُ ٱلرَّعۡدُ بِحَمۡدِهِۦ وَٱلۡمَلَٰٓئِكَةُ مِنۡ خِيفَتِهِۦ", fr:"Et le tonnerre célèbre Ses louanges et les Anges aussi, par crainte de Lui." },
+    { n:28, ar:"أَلَا بِذِكۡرِ ٱللَّهِ تَطۡمَئِنُّ ٱلۡقُلُوبُ", fr:"N'est-ce pas par l'évocation d'Allah que les cœurs se tranquillisent ?" },
+    { n:29, ar:"ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ طُوبَىٰ لَهُمۡ وَحُسۡنُ مَـَٔابٖ", fr:"Ceux qui croient et accomplissent les bonnes œuvres — à eux le bonheur parfait et la meilleure retraite." }
+  ],
+  note: "Ar-Ra'd compte 43 versets. Le verset 28 — 'N'est-ce pas par l'évocation d'Allah que les cœurs se tranquillisent ?' — est l'une des prescriptions thérapeutiques les plus profondes du Coran pour l'âme moderne."
+},
+
+14: {
+  basmala: true,
+  verses: [
+    { n:7, ar:"وَإِذۡ تَأَذَّنَ رَبُّكُمۡ لَئِن شَكَرۡتُمۡ لَأَزِيدَنَّكُمۡۖ وَلَئِن كَفَرۡتُمۡ إِنَّ عَذَابِي لَشَدِيدٞ", fr:"Et quand votre Seigneur proclama : « Si vous êtes reconnaissants, Je vous accorderai davantage. Mais si vous êtes ingrats... Mon châtiment est certes très sévère. »" },
+    { n:24, ar:"أَلَمۡ تَرَ كَيۡفَ ضَرَبَ ٱللَّهُ مَثَلٗا كَلِمَةٗ طَيِّبَةٗ كَشَجَرَةٖ طَيِّبَةٍ أَصۡلُهَا ثَابِتٞ وَفَرۡعُهَا فِي ٱلسَّمَآءِ", fr:"N'as-tu pas vu comment Allah propose la métaphore d'une bonne parole : elle est comme un bon arbre dont la racine est ferme et dont les branches s'élèvent dans le ciel." },
+    { n:25, ar:"تُؤۡتِيٓ أُكُلَهَا كُلَّ حِينِۭ بِإِذۡنِ رَبِّهَاۗ وَيَضۡرِبُ ٱللَّهُ ٱلۡأَمۡثَالَ لِلنَّاسِ لَعَلَّهُمۡ يَتَذَكَّرُونَ", fr:"Elle donne ses fruits à chaque saison avec la permission de son Seigneur. Et Allah propose des paraboles aux gens, afin qu'ils se souviennent." },
+    { n:37, ar:"رَّبَّنَآ إِنِّيٓ أَسۡكَنتُ مِن ذُرِّيَّتِي بِوَادٍ غَيۡرِ ذِي زَرۡعٍ عِندَ بَيۡتِكَ ٱلۡمُحَرَّمِ رَبَّنَا لِيُقِيمُواْ ٱلصَّلَوٰةَ فَٱجۡعَلۡ أَفۡئِدَةٗ مِّنَ ٱلنَّاسِ تَهۡوِيٓ إِلَيۡهِمۡ وَٱرۡزُقۡهُم مِّنَ ٱلثَّمَرَٰتِ لَعَلَّهُمۡ يَشۡكُرُونَ", fr:"[Ibrahim dit :] « Notre Seigneur, j'ai établi une partie de ma descendance dans une vallée sans culture, près de Ta Maison Sacrée, notre Seigneur, pour qu'ils accomplissent la prière. Fais donc que les cœurs de certaines gens s'inclinent vers eux. Et accorde-leur des fruits comme nourriture. Peut-être seront-ils reconnaissants. »" },
+    { n:41, ar:"رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ", fr:"« Notre Seigneur, pardonne-moi, ainsi qu'à mes père et mère et aux croyants, le Jour où aura lieu le Jugement. »" }
+  ],
+  note: "Ibrahim compte 52 versets. La supplication d'Ibrahim pour ses parents et les croyants (v.41) est récitée par des millions de musulmans dans leurs prières, transmettant ainsi à travers les âges la chaîne de miséricorde d'Ibrahim."
+},
+
+15: {
+  basmala: true,
+  verses: [
+    { n:9, ar:"إِنَّا نَحۡنُ نَزَّلۡنَا ٱلذِّكۡرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ", fr:"C'est Nous qui avons fait descendre le Rappel, et c'est Nous qui en sommes gardien." },
+    { n:28, ar:"وَإِذۡ قَالَ رَبُّكَ لِلۡمَلَٰٓئِكَةِ إِنِّي خَٰلِقُۢ بَشَرٗا مِّن صَلۡصَٰلٖ مِّنۡ حَمَإٖ مَّسۡنُونٖ", fr:"Et quand ton Seigneur dit aux Anges : « Je vais créer un homme d'argile sonore façonnée à partir d'une boue noire." },
+    { n:42, ar:"إِنَّ عِبَادِي لَيۡسَ لَكَ عَلَيۡهِمۡ سُلۡطَٰنٌ إِلَّا مَنِ ٱتَّبَعَكَ مِنَ ٱلۡغَاوِينَ", fr:"[Allah dit à Satan :] « Certes, sur Mes serviteurs, tu n'auras aucun pouvoir, sauf sur ceux des égarés qui te suivront. »" },
+    { n:49, ar:"نَبِّئۡ عِبَادِيٓ أَنِّيٓ أَنَا ٱلۡغَفُورُ ٱلرَّحِيمُ", fr:"Informe Mes serviteurs que c'est Moi le Grand Pardonneur, le Très Miséricordieux." },
+    { n:56, ar:"قَالَ وَمَن يَقۡنَطُ مِن رَّحۡمَةِ رَبِّهِۦٓ إِلَّا ٱلضَّآلُّونَ", fr:"Il dit : « Qui désespère de la miséricorde de son Seigneur, sinon les égarés ? »" }
+  ],
+  note: "Al-Hijr compte 99 versets. La promesse de préservation du Coran (v.9) est l'un des miracles vivants de l'islam : 14 siècles après sa révélation, pas un seul mot n'a changé — une promesse divine tenue."
+},
+
+16: {
+  basmala: true,
+  verses: [
+    { n:18, ar:"وَإِن تَعُدُّواْ نِعۡمَةَ ٱللَّهِ لَا تُحۡصُوهَآۗ إِنَّ ٱللَّهَ لَغَفُورٞ رَّحِيمٞ", fr:"Et si vous comptez les bienfaits d'Allah, vous ne saurez les dénombrer. Allah est certes Tout Pardonneur, Très Miséricordieux." },
+    { n:68, ar:"وَأَوۡحَىٰ رَبُّكَ إِلَى ٱلنَّحۡلِ أَنِ ٱتَّخِذِي مِنَ ٱلۡجِبَالِ بُيُوتٗا وَمِنَ ٱلشَّجَرِ وَمِمَّا يَعۡرِشُونَ", fr:"Et ton Seigneur révèle à l'abeille : « Prends des maisons dans les montagnes, les arbres et ce qu'ils construisent »." },
+    { n:69, ar:"ثُمَّ كُلِي مِن كُلِّ ٱلثَّمَرَٰتِ فَٱسۡلُكِي سُبُلَ رَبِّكِ ذُلُلٗاۚ يَخۡرُجُ مِنۢ بُطُونِهَا شَرَابٞ مُّخۡتَلِفٌ أَلۡوَٰنُهُۥ فِيهِ شِفَآءٞ لِّلنَّاسِۗ", fr:"Puis mange de tous les fruits et suis les sentiers de ton Seigneur en toute humilité. De son ventre sort une liqueur aux couleurs variées, dans laquelle il y a une guérison pour les gens." },
+    { n:90, ar:"۞ إِنَّ ٱللَّهَ يَأۡمُرُ بِٱلۡعَدۡلِ وَٱلۡإِحۡسَٰنِ وَإِيتَآئِ ذِي ٱلۡقُرۡبَىٰ وَيَنۡهَىٰ عَنِ ٱلۡفَحۡشَآءِ وَٱلۡمُنكَرِ وَٱلۡبَغۡيِۚ يَعِظُكُمۡ لَعَلَّكُمۡ تَذَكَّرُونَ", fr:"Allah commande l'équité, la bienfaisance et l'assistance aux proches. Et Il interdit la turpitude, le blâmable et la tyrannie. Il vous exhorte ainsi, peut-être vous souviendrez-vous." },
+    { n:128, ar:"إِنَّ ٱللَّهَ مَعَ ٱلَّذِينَ ٱتَّقَواْ وَّٱلَّذِينَ هُم مُّحۡسِنُونَ", fr:"Certes, Allah est avec ceux qui L'ont craint et ceux qui font le bien." }
+  ],
+  note: "An-Nahl compte 128 versets. Le verset 90 — 'Allah commande l'équité, la bienfaisance et l'assistance aux proches' — est récité lors des sermons du vendredi dans de nombreuses mosquées du monde entier."
+},
+
+17: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"سُبۡحَٰنَ ٱلَّذِيٓ أَسۡرَىٰ بِعَبۡدِهِۦ لَيۡلٗا مِّنَ ٱلۡمَسۡجِدِ ٱلۡحَرَامِ إِلَى ٱلۡمَسۡجِدِ ٱلۡأَقۡصَا ٱلَّذِي بَٰرَكۡنَا حَوۡلَهُۥ", fr:"Gloire et Pureté à Celui qui a fait voyager de nuit Son serviteur de la Mosquée Sacrée à la Mosquée Al-Aqsa dont Nous avons béni les alentours." },
+    { n:23, ar:"وَقَضَىٰ رَبُّكَ أَلَّا تَعۡبُدُوٓاْ إِلَّآ إِيَّاهُ وَبِٱلۡوَٰلِدَيۡنِ إِحۡسَٰنًاۚ إِمَّا يَبۡلُغَنَّ عِندَكَ ٱلۡكِبَرَ أَحَدُهُمَآ أَوۡ كِلَاهُمَا فَلَا تَقُل لَّهُمَآ أُفّٖ وَلَا تَنۡهَرۡهُمَا وَقُل لَّهُمَا قَوۡلٗا كَرِيمٗا", fr:"Ton Seigneur a décrété que vous n'adoriez que Lui, et que vous soyez bons envers vos parents. Si l'un d'eux ou tous deux atteignent la vieillesse auprès de toi, ne leur dis pas « Pouah » et ne les rabroue pas. Dis-leur des paroles généreuses." },
+    { n:44, ar:"وَإِن مِّن شَيۡءٍ إِلَّا يُسَبِّحُ بِحَمۡدِهِۦ وَلَٰكِن لَّا تَفۡقَهُونَ تَسۡبِيحَهُمۡۗ", fr:"Il n'existe pas une seule chose qui ne Le glorifie à Sa louange — mais vous ne comprenez pas leur glorification." },
+    { n:79, ar:"وَمِنَ ٱلَّيۡلِ فَتَهَجَّدۡ بِهِۦ نَافِلَةٗ لَّكَ عَسَىٰٓ أَن يَبۡعَثَكَ رَبُّكَ مَقَامٗا مَّحۡمُودٗا", fr:"Et veille durant une partie de la nuit pour accomplir une prière surérogatoire. Peut-être que ton Seigneur t'élèvera à une Station digne de louange." },
+    { n:80, ar:"وَقُل رَّبِّ أَدۡخِلۡنِي مُدۡخَلَ صِدۡقٖ وَأَخۡرِجۡنِي مُخۡرَجَ صِدۡقٖ وَٱجۡعَل لِّي مِن لَّدُنكَ سُلۡطَٰنٗا نَّصِيرٗا", fr:"Et dis : « Mon Seigneur, fais-moi entrer d'une entrée véridique et fais-moi sortir d'une sortie véridique. Et accorde-moi de Ta part un pouvoir secourable. »" }
+  ],
+  note: "Al-Isra compte 111 versets. Le verset 23 — sur les droits des parents — est l'un des commandements les plus concrets du Coran : ne pas même dire 'Pouah' à ses parents vieillissants. L'excellence envers eux est une adoration directe."
+},
+
+18: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ", fr:"Louange à Allah qui a fait descendre sur Son serviteur le Livre, sans y introduire de déviation." },
+    { n:10, ar:"إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا", fr:"Quand les jeunes gens se réfugièrent dans la grotte et dirent : « Notre Seigneur, accorde-nous de Ta part une grâce et dispose pour nous notre affaire de la bonne façon. »" },
+    { n:28, ar:"وَٱصۡبِرۡ نَفۡسَكَ مَعَ ٱلَّذِينَ يَدۡعُونَ رَبَّهُم بِٱلۡغَدَوٰةِ وَٱلۡعَشِيِّ يُرِيدُونَ وَجۡهَهُۥ", fr:"Et prends patience avec ceux qui invoquent leur Seigneur matin et soir, cherchant Sa Face." },
+    { n:46, ar:"ٱلۡمَالُ وَٱلۡبَنُونَ زِينَةُ ٱلۡحَيَوٰةِ ٱلدُّنۡيَاۖ وَٱلۡبَٰقِيَٰتُ ٱلصَّٰلِحَٰتُ خَيۡرٌ عِندَ رَبِّكَ ثَوَابٗا وَخَيۡرٌ أَمَلٗا", fr:"La richesse et les enfants sont l'ornement de la vie dans ce monde. Mais les bonnes œuvres durables sont meilleures auprès de ton Seigneur en termes de récompense et d'espoir." },
+    { n:110, ar:"قُلۡ إِنَّمَآ أَنَا۠ بَشَرٞ مِّثۡلُكُمۡ يُوحَىٰٓ إِلَيَّ أَنَّمَآ إِلَٰهُكُمۡ إِلَٰهٞ وَٰحِدٞۖ فَمَن كَانَ يَرۡجُواْ لِقَآءَ رَبِّهِۦ فَلۡيَعۡمَلۡ عَمَلٗا صَٰلِحٗا وَلَا يُشۡرِكۡ بِعِبَادَةِ رَبِّهِۦٓ أَحَدَۢا", fr:"Dis : « Je suis un être humain comme vous. Il m'a été révélé que votre Dieu est un Dieu unique. Que celui qui espère rencontrer son Seigneur accomplisse de bonnes œuvres, et qu'il n'associe aucun à l'adoration de son Seigneur. »" }
+  ],
+  note: "Al-Kahf compte 110 versets. À réciter chaque vendredi pour la protection contre le Dajjal (l'Antéchrist). Le verset final — 'accomplir de bonnes œuvres sans associer à Allah' — résume l'islam en une phrase : sincérité + action."
+},
+
+19: {
+  basmala: true,
+  verses: [
+    { n:2, ar:"ذِكۡرُ رَحۡمَتِ رَبِّكَ عَبۡدَهُۥ زَكَرِيَّآ", fr:"[C'est] le récit de la miséricorde de ton Seigneur envers Son serviteur Zakariya." },
+    { n:4, ar:"قَالَ رَبِّ إِنِّي وَهَنَ ٱلۡعَظۡمُ مِنِّي وَٱشۡتَعَلَ ٱلرَّأۡسُ شَيۡبٗا وَلَمۡ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيًّا", fr:"Il dit : « Mon Seigneur, mes os sont devenus faibles et ma tête s'est embrasée de cheveux blancs. Et je n'ai jamais été malheureux dans mes invocations, ô mon Seigneur. »" },
+    { n:16, ar:"وَٱذۡكُرۡ فِي ٱلۡكِتَٰبِ مَرۡيَمَ إِذِ ٱنتَبَذَتۡ مِنۡ أَهۡلِهَا مَكَانٗا شَرۡقِيّٗا", fr:"Et mentionne dans le Livre Marie, quand elle s'éloigna de sa famille, vers un endroit oriental." },
+    { n:24, ar:"فَنَادَىٰهَا مِن تَحۡتِهَآ أَلَّا تَحۡزَنِي قَدۡ جَعَلَ رَبُّكِ تَحۡتَكِ سَرِيًّا", fr:"Alors [l'ange] l'appela d'en bas : « Ne t'afflige pas ! Ton Seigneur a mis à tes pieds un ruisseau. »" },
+    { n:30, ar:"قَالَ إِنِّي عَبۡدُ ٱللَّهِ ءَاتَىٰنِيَ ٱلۡكِتَٰبَ وَجَعَلَنِي نَبِيًّا", fr:"[Jésus] dit dès le berceau : « Je suis le serviteur d'Allah. Il m'a donné le Livre et m'a fait prophète. »" },
+    { n:33, ar:"وَٱلسَّلَٰمُ عَلَيَّ يَوۡمَ وُلِدتُّ وَيَوۡمَ أَمُوتُ وَيَوۡمَ أُبۡعَثُ حَيًّا", fr:"[Jésus dit :] « Et la paix est sur moi le jour où je suis né, le jour où je mourrai, et le jour où je serai ressuscité vivant. »" }
+  ],
+  note: "Maryam compte 98 versets. Jésus (Issa) qui parle dès le berceau pour affirmer qu'il est serviteur d'Allah est l'un des miracles les plus étonnants du Coran — et une réponse directe aux controverses théologiques millénaires sur sa nature."
+},
+
+20: {
+  basmala: true,
+  verses: [
+    { n:14, ar:"إِنَّنِيٓ أَنَا ٱللَّهُ لَآ إِلَٰهَ إِلَّآ أَنَا۠ فَٱعۡبُدۡنِي وَأَقِمِ ٱلصَّلَوٰةَ لِذِكۡرِيٓ", fr:"[Allah dit :] « Certes, Je suis Allah. Pas de divinité que Moi. Adore-Moi donc, et accomplis la prière pour Mon rappel. »" },
+    { n:25, ar:"قَالَ رَبِّ ٱشۡرَحۡ لِي صَدۡرِي", fr:"[Moussa] dit : « Mon Seigneur, ouvre-moi ma poitrine." },
+    { n:26, ar:"وَيَسِّرۡ لِيٓ أَمۡرِي", fr:"Et facilite-moi ma tâche." },
+    { n:27, ar:"وَٱحۡلُلۡ عُقۡدَةٗ مِّن لِّسَانِي", fr:"Et dénoue le nœud de ma langue," },
+    { n:28, ar:"يَفۡقَهُواْ قَوۡلِي", fr:"afin qu'ils comprennent mes paroles. »" },
+    { n:114, ar:"وَقُل رَّبِّ زِدۡنِي عِلۡمٗا", fr:"Et dis : « Mon Seigneur, accroît ma science. »" },
+    { n:132, ar:"وَأۡمُرۡ أَهۡلَكَ بِٱلصَّلَوٰةِ وَٱصۡطَبِرۡ عَلَيۡهَاۖ لَا نَسۡـَٔلُكَ رِزۡقٗاۖ نَّحۡنُ نَرۡزُقُكَۗ وَٱلۡعَٰقِبَةُ لِلتَّقۡوَىٰ", fr:"Ordonne à ta famille la prière et persévères-y. Nous ne te demandons pas de subsistance : c'est Nous qui te la donnons. Et la bonne fin appartient à ceux qui ont la piété." }
+  ],
+  note: "Ta-Ha compte 135 versets. La dou'a de Moussa (v.25-28) — 'Seigneur, ouvre-moi ma poitrine' — est utilisée par des millions de personnes avant les examens, les discours, et toute situation difficile. Et 'Rabbi zidni ilma' (v.114) est la seule prière pour plus de science dans le Coran."
+},
+
+21: {
+  basmala: true,
+  verses: [
+    { n:83, ar:"وَأَيُّوبَ إِذۡ نَادَىٰ رَبَّهُۥٓ أَنِّي مَسَّنِيَ ٱلضُّرُّ وَأَنتَ أَرۡحَمُ ٱلرَّٰحِمِينَ", fr:"Et [rappelle-toi] Ayyub [Job] quand il appela son Seigneur : « L'adversité m'a touché et Tu es le plus Miséricordieux des miséricordieux. »" },
+    { n:87, ar:"وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّٰلِمِينَ", fr:"Et [rappelle-toi] celui à la baleine [Yunus] : quand il s'en alla, indigné... Il invoqua dans les ténèbres : « Il n'y a pas de divinité sauf Toi ! Gloire à Toi ! J'ai été vraiment de ceux qui ont fait du tort ! »" },
+    { n:107, ar:"وَمَآ أَرۡسَلۡنَٰكَ إِلَّا رَحۡمَةٗ لِّلۡعَٰلَمِينَ", fr:"Et Nous ne t'avons envoyé [Muhammad] qu'en tant que miséricorde pour l'univers." },
+    { n:112, ar:"قَالَ رَبِّ ٱحۡكُم بِٱلۡحَقِّۗ وَرَبُّنَا ٱلرَّحۡمَٰنُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ", fr:"Il [le Prophète] dit : « Mon Seigneur, prononce avec la vérité. Notre Seigneur est le Tout Miséricordieux, Celui qu'on implore contre ce que vous décrivez. »" }
+  ],
+  note: "Al-Anbiya compte 112 versets. La dou'a de Yunus dans le ventre de la baleine (v.87) est considérée comme l'une des supplications les plus puissantes : quand tout espoir semble perdu, ces paroles ont libéré un prophète des profondeurs de la mer."
+},
+
+22: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُواْ رَبَّكُمۡۚ إِنَّ زَلۡزَلَةَ ٱلسَّاعَةِ شَيۡءٌ عَظِيمٞ", fr:"Ô gens ! Craignez votre Seigneur. Le séisme de l'Heure est vraiment une chose terrible." },
+    { n:27, ar:"وَأَذِّن فِي ٱلنَّاسِ بِٱلۡحَجِّ يَأۡتُوكَ رِجَالٗا وَعَلَىٰ كُلِّ ضَامِرٖ يَأۡتِينَ مِن كُلِّ فَجٍّ عَمِيقٖ", fr:"Et proclame aux gens le pèlerinage : ils viendront à pied et sur toutes sortes de montures efflanquées, arrivant de tous les cols lointains." },
+    { n:37, ar:"لَن يَنَالَ ٱللَّهَ لُحُومُهَا وَلَا دِمَآؤُهَا وَلَٰكِن يَنَالُهُ ٱلتَّقۡوَىٰ مِنكُمۡ", fr:"Ni leurs chairs ni leurs sangs n'atteignent Allah. C'est votre piété [taqwa] qui L'atteint." },
+    { n:40, ar:"ٱلَّذِينَ أُخۡرِجُواْ مِن دِيَٰرِهِم بِغَيۡرِ حَقٍّ إِلَّآ أَن يَقُولُواْ رَبُّنَا ٱللَّهُ", fr:"Ceux qui ont été expulsés de leurs maisons injustement, pour la seule raison qu'ils disaient : « Allah est notre Seigneur. »" },
+    { n:78, ar:"وَجَٰهِدُواْ فِي ٱللَّهِ حَقَّ جِهَادِهِۦۚ هُوَ ٱجۡتَبَىٰكُمۡ وَمَا جَعَلَ عَلَيۡكُمۡ فِي ٱلدِّينِ مِنۡ حَرَجٖ", fr:"Et luttez pour Allah comme Il se doit de lutter pour Lui. C'est Lui qui vous a choisis. Et Il ne vous a imposé aucune gêne dans la religion." }
+  ],
+  note: "Al-Hajj compte 78 versets. Le verset 37 est fondamental : ce qui compte dans les actes d'adoration n'est pas l'apparence extérieure (ni le sang ni la chair du sacrifice) mais la sincérité et la piété du cœur."
+},
+
+23: {
+  basmala: true,
+  verses: [
+    { n:1, ar:"قَدۡ أَفۡلَحَ ٱلۡمُؤۡمِنُونَ", fr:"Vraiment, les croyants ont réussi :" },
+    { n:2, ar:"ٱلَّذِينَ هُمۡ فِي صَلَاتِهِمۡ خَٰشِعُونَ", fr:"ceux qui font preuve d'humilité dans leur prière," },
+    { n:3, ar:"وَٱلَّذِينَ هُمۡ عَنِ ٱللَّغۡوِ مُعۡرِضُونَ", fr:"ceux qui se détournent des futilités," },
+    { n:4, ar:"وَٱلَّذِينَ هُمۡ لِلزَّكَوٰةِ فَٰعِلُونَ", fr:"ceux qui s'acquittent de la Zakat," },
+    { n:5, ar:"وَٱلَّذِينَ هُمۡ لِفُرُوجِهِمۡ حَٰفِظُونَ", fr:"ceux qui préservent leur chasteté" },
+    { n:8, ar:"وَٱلَّذِينَ هُمۡ لِأَمَٰنَٰتِهِمۡ وَعَهۡدِهِمۡ رَٰعُونَ", fr:"ceux qui respectent leurs dépôts et leurs engagements," },
+    { n:9, ar:"وَٱلَّذِينَ هُمۡ عَلَىٰ صَلَوَٰتِهِمۡ يُحَافِظُونَ", fr:"et ceux qui observent fidèlement leurs prières." },
+    { n:10, ar:"أُوْلَٰٓئِكَ هُمُ ٱلۡوَٰرِثُونَ", fr:"Ceux-là seront les héritiers" },
+    { n:11, ar:"ٱلَّذِينَ يَرِثُونَ ٱلۡفِرۡدَوۡسَۖ هُمۡ فِيهَا خَٰلِدُونَ", fr:"qui hériteront du Paradis (al-Firdaws). Ils y demeureront éternellement." }
+  ],
+  note: "Al-Mu'minun compte 118 versets. Les versets 1-11 forment un bloc parfait : 7 qualités → réussite garantie → Paradis. C'est la recette divine du succès, applicable à tout être humain quelle que soit son époque."
+},
+
+24: {
+  basmala: true,
+  verses: [
+    { n:30, ar:"قُل لِّلۡمُؤۡمِنِينَ يَغُضُّواْ مِنۡ أَبۡصَٰرِهِمۡ وَيَحۡفَظُواْ فُرُوجَهُمۡۚ ذَٰلِكَ أَزۡكَىٰ لَهُمۡۚ إِنَّ ٱللَّهَ خَبِيرُۢ بِمَا يَصۡنَعُونَ", fr:"Dis aux croyants de baisser leurs regards et de préserver leur chasteté. C'est plus pur pour eux. Allah est Parfaitement Connaisseur de ce qu'ils font." },
+    { n:31, ar:"وَقُل لِّلۡمُؤۡمِنَٰتِ يَغۡضُضۡنَ مِنۡ أَبۡصَٰرِهِنَّ وَيَحۡفَظۡنَ فُرُوجَهُنَّ", fr:"Et dis aux croyantes de baisser leurs regards et de préserver leur chasteté." },
+    { n:35, ar:"ٱللَّهُ نُورُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۚ مَثَلُ نُورِهِۦ كَمِشۡكَوٰةٖ فِيهَا مِصۡبَاحٌۖ ٱلۡمِصۡبَاحُ فِي زُجَاجَةٍۖ ٱلزُّجَاجَةُ كَأَنَّهَا كَوۡكَبٞ دُرِّيّٞ يُوقَدُ مِن شَجَرَةٖ مُّبَٰرَكَةٍ زَيۡتُونَةٖ لَّا شَرۡقِيَّةٖ وَلَا غَرۡبِيَّةٖ يَكَادُ زَيۡتُهَا يُضِيٓءُ وَلَوۡ لَمۡ تَمۡسَسۡهُ نَارٞۚ نُّورٌ عَلَىٰ نُورٖۗ يَهۡدِي ٱللَّهُ لِنُورِهِۦ مَن يَشَآءُۚ", fr:"Allah est la Lumière des cieux et de la terre. Sa lumière est comparable à une niche où se trouve une lampe ; la lampe est dans un cristal ; et le cristal est semblable à une étoile brillante. Elle est allumée à partir d'un arbre béni : un olivier qui n'est ni d'Orient ni d'Occident et dont l'huile est près d'éclairer sans même que le feu la touche. Lumière sur Lumière. Allah guide vers Sa lumière qui Il veut." },
+    { n:36, ar:"فِي بُيُوتٍ أَذِنَ ٱللَّهُ أَن تُرۡفَعَ وَيُذۡكَرَ فِيهَا ٱسۡمُهُۥ يُسَبِّحُ لَهُۥ فِيهَا بِٱلۡغُدُوِّ وَٱلۡأٓصَالِ", fr:"[Cette lumière brille] dans des maisons qu'Allah a permis d'élever et où Son nom est invoqué. On L'y glorifie matin et soir." }
+  ],
+  note: "An-Nur compte 64 versets. Le verset de la Lumière (35) est considéré par de nombreux savants comme le plus beau verset du Coran. Imam Al-Ghazali a consacré un livre entier à son explication mystique."
+},
+
+25: {
+  basmala: true,
+  verses: [
+    { n:63, ar:"وَعِبَادُ ٱلرَّحۡمَٰنِ ٱلَّذِينَ يَمۡشُونَ عَلَى ٱلۡأَرۡضِ هَوۡنٗا وَإِذَا خَاطَبَهُمُ ٱلۡجَٰهِلُونَ قَالُواْ سَلَٰمٗا", fr:"Les serviteurs du Tout Miséricordieux sont ceux qui marchent humblement sur la terre et qui, lorsque des ignorants les interpellent, répondent par des paroles de paix." },
+    { n:64, ar:"وَٱلَّذِينَ يَبِيتُونَ لِرَبِّهِمۡ سُجَّدٗا وَقِيَٰمٗا", fr:"ceux qui passent la nuit prosternés et debout devant leur Seigneur," },
+    { n:67, ar:"وَٱلَّذِينَ إِذَآ أَنفَقُواْ لَمۡ يُسۡرِفُواْ وَلَمۡ يَقۡتُرُواْ وَكَانَ بَيۡنَ ذَٰلِكَ قَوَامٗا", fr:"ceux qui, dans leurs dépenses, ne sont ni prodigues ni avares, et restent dans un juste milieu," },
+    { n:70, ar:"إِلَّا مَن تَابَ وَءَامَنَ وَعَمِلَ عَمَلٗا صَٰلِحٗا فَأُوْلَٰٓئِكَ يُبَدِّلُ ٱللَّهُ سَيِّـَٔاتِهِمۡ حَسَنَٰتٖۗ وَكَانَ ٱللَّهُ غَفُورٗا رَّحِيمٗا", fr:"Sauf celui qui se repent, croit et fait de bonnes œuvres, car ceux-là, Allah changera leurs mauvaises actions en bonnes. Et Allah est Tout Pardonneur, Très Miséricordieux." },
+    { n:74, ar:"وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبۡ لَنَا مِنۡ أَزۡوَٰجِنَا وَذُرِّيَّٰتِنَا قُرَّةَ أَعۡيُنٖ وَٱجۡعَلۡنَا لِلۡمُتَّقِينَ إِمَامًا", fr:"ceux qui disent : « Notre Seigneur, accorde-nous la joie des yeux en nos épouses et nos descendants, et fais de nous un guide pour les pieux. »" }
+  ],
+  note: "Al-Furqan compte 77 versets. La dou'a du verset 74 — 'Accorde-nous la joie des yeux en nos familles' — est la prière de tout parent aimant. La joie des yeux en ses enfants est considérée comme l'un des plus grands biens de cette vie."
+},
+
+26: {
+  basmala: true,
+  verses: [
+    { n:3, ar:"لَعَلَّكَ بَٰخِعٞ نَّفۡسَكَ أَلَّا يَكُونُواْ مُؤۡمِنِينَ", fr:"Peut-être te consumes-tu [de chagrin] parce qu'ils ne sont pas croyants ?" },
+    { n:78, ar:"ٱلَّذِي خَلَقَنِي فَهُوَ يَهۡدِينِ", fr:"[Ibrahim dit :] « Celui qui m'a créé, c'est Lui qui me guide." },
+    { n:79, ar:"وَٱلَّذِي هُوَ يُطۡعِمُنِي وَيَسۡقِينِ", fr:"C'est Lui qui me donne à manger et à boire." },
+    { n:80, ar:"وَإِذَا مَرِضۡتُ فَهُوَ يَشۡفِينِ", fr:"Et lorsque je suis malade, c'est Lui qui me guérit." },
+    { n:81, ar:"وَٱلَّذِي يُمِيتُنِي ثُمَّ يُحۡيِينِ", fr:"C'est Lui qui me fera mourir, puis qui me remettra en vie." },
+    { n:82, ar:"وَٱلَّذِيٓ أَطۡمَعُ أَن يَغۡفِرَ لِي خَطِيٓـَٔتِي يَوۡمَ ٱلدِّينِ", fr:"Et sur qui j'espère qu'Il me pardonnera mes fautes le Jour de la Rétribution. »" },
+    { n:217, ar:"وَتَوَكَّلۡ عَلَى ٱلۡعَزِيزِ ٱلرَّحِيمِ", fr:"Et place ta confiance en le Puissant, le Très Miséricordieux." }
+  ],
+  note: "Ash-Shu'ara compte 227 versets. Les versets 78-82 d'Ibrahim — un prophète décrivant sa relation intime avec Allah : Il crée, Il guide, Il nourrit, Il guérit, Il fait mourir, Il ressuscite, Il pardonne — forment l'un des plus beaux aveux de dépendance totale et confiante en Allah."
+},
+
+27: {
+  basmala: true,
+  verses: [
+    { n:18, ar:"حَتَّىٰٓ إِذَآ أَتَوۡاْ عَلَىٰ وَادِ ٱلنَّمۡلِ قَالَتۡ نَمۡلَةٞ يَٰٓأَيُّهَا ٱلنَّمۡلُ ٱدۡخُلُواْ مَسَٰكِنَكُمۡ لَا يَحۡطِمَنَّكُمۡ سُلَيۡمَٰنُ وَجُنُودُهُۥ وَهُمۡ لَا يَشۡعُرُونَ", fr:"Jusqu'à ce qu'ils arrivèrent à la vallée des fourmis, et une fourmi dit : « Ô fourmis, entrez dans vos demeures, que Sulayman et ses armées ne vous écrasent sans s'en rendre compte. »" },
+    { n:19, ar:"فَتَبَسَّمَ ضَاحِكٗا مِّن قَوۡلِهَا وَقَالَ رَبِّ أَوۡزِعۡنِيٓ أَن أَشۡكُرَ نِعۡمَتَكَ", fr:"Alors il [Sulayman] sourit et rit de ses paroles, et dit : « Mon Seigneur, inspire-moi à être reconnaissant envers Tes bienfaits. »" },
+    { n:40, ar:"قَالَ ٱلَّذِي عِندَهُۥ عِلۡمٞ مِّنَ ٱلۡكِتَٰبِ أَنَا۠ ءَاتِيكَ بِهِۦ قَبۡلَ أَن يَرۡتَدَّ إِلَيۡكَ طَرۡفُكَۚ", fr:"Celui qui possédait une science du Livre dit : « Je t'apporterai [le trône] avant que ton regard revienne à toi-même. »" },
+    { n:62, ar:"أَمَّن يُجِيبُ ٱلۡمُضۡطَرَّ إِذَا دَعَاهُ وَيَكۡشِفُ ٱلسُّوٓءَ وَيَجۡعَلُكُمۡ خُلَفَآءَ ٱلۡأَرۡضِۗ", fr:"Qui répond à la personne en détresse quand elle L'invoque, qui dissipe le mal et qui vous établit comme successeurs sur la terre ?" }
+  ],
+  note: "An-Naml compte 93 versets. Le verset 62 pose la question rhétorique la plus puissante de la sourate : qui d'autre qu'Allah répond à l'appel de celui qui est en détresse absolue ? La réponse est évidente et bouleversante."
+},
+
+28: {
+  basmala: true,
+  verses: [
+    { n:7, ar:"وَأَوۡحَيۡنَآ إِلَىٰٓ أُمِّ مُوسَىٰٓ أَنۡ أَرۡضِعِيهِ فَإِذَا خِفۡتِ عَلَيۡهِ فَأَلۡقِيهِ فِي ٱلۡيَمِّ وَلَا تَخَافِي وَلَا تَحۡزَنِيٓ إِنَّا رَآدُّوهُ إِلَيۡكِ وَجَٰعِلُوهُ مِنَ ٱلۡمُرۡسَلِينَ", fr:"Nous avons révélé à la mère de Moussa : « Allaite-le. Puis, quand tu craindras pour lui, jette-le dans le fleuve. N'aie pas peur et ne t'attriste pas. Nous te le rendrons et ferons de lui un Messager. »" },
+    { n:77, ar:"وَٱبۡتَغِ فِيمَآ ءَاتَىٰكَ ٱللَّهُ ٱلدَّارَ ٱلۡأٓخِرَةَۖ وَلَا تَنسَ نَصِيبَكَ مِنَ ٱلدُّنۡيَاۖ وَأَحۡسِن كَمَآ أَحۡسَنَ ٱللَّهُ إِلَيۡكَۖ وَلَا تَبۡغِ ٱلۡفَسَادَ فِي ٱلۡأَرۡضِۖ إِنَّ ٱللَّهَ لَا يُحِبُّ ٱلۡمُفۡسِدِينَ", fr:"Et recherche, dans ce qu'Allah t'a donné, la Demeure de l'au-delà. Et n'oublie pas ta part dans ce monde. Et sois bienfaisant comme Allah a été bienfaisant envers toi. Et ne recherche pas la corruption sur la terre, car Allah n'aime pas les corrupteurs." },
+    { n:88, ar:"وَلَا تَدۡعُ مَعَ ٱللَّهِ إِلَٰهًا ءَاخَرَۘ لَآ إِلَٰهَ إِلَّا هُوَۚ كُلُّ شَيۡءٍ هَالِكٌ إِلَّا وَجۡهَهُۥۚ لَهُ ٱلۡحُكۡمُ وَإِلَيۡهِ تُرۡجَعُونَ", fr:"Et n'invoque pas, à côté d'Allah, d'autre divinité. Pas de divinité sauf Lui. Toute chose est périssable, sauf Sa Face. À Lui appartient le jugement. Et c'est vers Lui que vous retournerez." }
+  ],
+  note: "Al-Qasas compte 88 versets. Le verset 7 — la mère de Moussa qui reçoit l'ordre divin de jeter son bébé dans le Nil — est l'un des plus émouvants du Coran : la confiance absolue exige parfois de lâcher ce qu'on a de plus précieux."
+},
+
+29: {
+  basmala: true,
+  verses: [
+    { n:2, ar:"أَحَسِبَ ٱلنَّاسُ أَن يُتۡرَكُوٓاْ أَن يَقُولُوٓاْ ءَامَنَّا وَهُمۡ لَا يُفۡتَنُونَ", fr:"Les gens pensent-ils qu'on les laissera dire : « Nous croyons » sans être mis à l'épreuve ?" },
+    { n:41, ar:"مَثَلُ ٱلَّذِينَ ٱتَّخَذُواْ مِن دُونِ ٱللَّهِ أَوۡلِيَآءَ كَمَثَلِ ٱلۡعَنكَبُوتِ ٱتَّخَذَتۡ بَيۡتٗاۖ وَإِنَّ أَوۡهَنَ ٱلۡبُيُوتِ لَبَيۡتُ ٱلۡعَنكَبُوتِ لَوۡ كَانُواْ يَعۡلَمُونَ", fr:"Ceux qui ont pris, en dehors d'Allah, des protecteurs, ressemblent à l'araignée qui se construit une toile. La plus fragile des maisons, c'est la toile de l'araignée. S'ils savaient !" },
+    { n:45, ar:"ٱتۡلُ مَآ أُوحِيَ إِلَيۡكَ مِنَ ٱلۡكِتَٰبِ وَأَقِمِ ٱلصَّلَوٰةَۖ إِنَّ ٱلصَّلَوٰةَ تَنۡهَىٰ عَنِ ٱلۡفَحۡشَآءِ وَٱلۡمُنكَرِۗ وَلَذِكۡرُ ٱللَّهِ أَكۡبَرُ", fr:"Récite ce qui t'a été révélé du Livre et accomplis la prière. La prière préserve des turpitudes et des actes répréhensibles. Et le rappel d'Allah est certes plus grand." },
+    { n:69, ar:"وَٱلَّذِينَ جَٰهَدُواْ فِينَا لَنَهۡدِيَنَّهُمۡ سُبُلَنَاۚ وَإِنَّ ٱللَّهَ لَمَعَ ٱلۡمُحۡسِنِينَ", fr:"Ceux qui luttent en Notre cause, Nous les guiderons assurément sur Nos voies. Allah est certes avec les bienfaisants." }
+  ],
+  note: "Al-Ankabut compte 69 versets. Le verset 2 est un avertissement universel : la foi sera testée. Personne n'est épargné par l'épreuve — c'est la condition même pour que la foi soit réelle et non simulée."
+},
+
+30: {
+  basmala: true,
+  verses: [
+    { n:17, ar:"فَسُبۡحَٰنَ ٱللَّهِ حِينَ تُمۡسُونَ وَحِينَ تُصۡبِحُونَ", fr:"Glorifiez donc Allah quand vous atteignez le soir et quand vous atteignez le matin." },
+    { n:20, ar:"وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَكُم مِّن تُرَابٖ ثُمَّ إِذَآ أَنتُم بَشَرٞ تَنتَشِرُونَ", fr:"Parmi Ses signes : Il vous a créés de terre, et voilà que vous êtes des êtres humains qui vous répandez." },
+    { n:21, ar:"وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ", fr:"Parmi Ses signes : Il a créé pour vous, de vous-mêmes, des épouses pour que vous trouviez la quiétude auprès d'elles, et Il a établi entre vous de l'affection et de la miséricorde. Il y a en cela des signes pour des gens qui réfléchissent." },
+    { n:22, ar:"وَمِنۡ ءَايَٰتِهِۦ خَلۡقُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَٱخۡتِلَٰفُ أَلۡسِنَتِكُمۡ وَأَلۡوَٰنِكُمۡۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّلۡعَٰلِمِينَ", fr:"Parmi Ses signes : la création des cieux et de la terre et la diversité de vos langues et de vos couleurs. Il y a en cela des signes pour les savants." },
+    { n:60, ar:"فَٱصۡبِرۡ إِنَّ وَعۡدَ ٱللَّهِ حَقّٞۖ وَلَا يَسۡتَخِفَّنَّكَ ٱلَّذِينَ لَا يُوقِنُونَ", fr:"Sois donc patient, car la promesse d'Allah est vérité. Et que ceux qui n'ont aucune certitude ne t'ébranlent pas." }
+  ],
+  note: "Ar-Rum compte 60 versets. Le verset 21 — sur le mariage comme signe divin d'affection (mawadda) et de miséricorde (rahma) — est l'un des versets les plus cités lors des cérémonies de mariage islamiques dans le monde entier."
+}
+
+};
+
+// ════════════════════════════════════════
+// SURAH FULL TEXT DISPLAY
+// ════════════════════════════════════════
+let surahBodyOpen = false;
+
+function toggleSurahFull() {
+  const body   = document.getElementById('surahFullBody');
+  const toggle = document.getElementById('surahToggleBtn');
+  surahBodyOpen = !surahBodyOpen;
+  if (surahBodyOpen) {
+    body.classList.add('open');
+    toggle.classList.add('open');
+    toggle.textContent = '▲';
+  } else {
+    body.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.textContent = '▼';
+  }
+}
+
+function renderSurahFull(dayNum) {
+  const body = document.getElementById('surahFullBody');
+  if (!body) return;
+
+  // Reset toggle state
+  surahBodyOpen = false;
+  body.classList.remove('open');
+  const toggle = document.getElementById('surahToggleBtn');
+  if (toggle) { toggle.classList.remove('open'); toggle.textContent = '▼'; }
+
+  const data = FULL_SURAHS[dayNum];
+  if (!data) {
+    body.innerHTML = '<div class="surah-note">Texte complet en cours d\'ajout.</div>';
+    return;
+  }
+
+  let html = '';
+  if (data.basmala && dayNum !== 1) {
+    // Show basmala banner (not for Al-Fatiha since it's verse 1)
+    html += `<div class="surah-verse-block" style="text-align:center; border-left:none; border:1px solid rgba(201,168,76,0.2);">
+      <div class="surah-verse-ar" style="font-size:1.15rem;">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</div>
+      <div class="surah-verse-fr" style="font-size:0.75rem; color:var(--text-dim); font-style:italic;">Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.</div>
+    </div>`;
+  }
+
+  data.verses.forEach(v => {
+    html += `<div class="surah-verse-block">
+      <div class="surah-verse-num">Verset ${v.n}</div>
+      <div class="surah-verse-ar">${v.ar}</div>
+      <div class="surah-verse-fr">${v.fr}</div>
+    </div>`;
+  });
+
+  if (data.note) {
+    html += `<div class="surah-note">${data.note}</div>`;
+  }
+
+  body.innerHTML = html;
+}
+
+
 // INIT
 // ────────────────────────────────────────
 updateTodayCard();
 buildCalendar();
 initSunWidget();
+
+// ════════════════════════════════════════
+// INSTALL PROMPT
+// ════════════════════════════════════════
+(function() {
+  const DISMISSED_KEY = 'ramadan_install_dismissed';
+  const overlay  = document.getElementById('installOverlay');
+  const btnMain  = document.getElementById('installBtnMain');
+  const btnLabel = document.getElementById('installBtnLabel');
+  const btnDismiss = document.getElementById('installBtnDismiss');
+  const iosSteps = document.getElementById('iosSteps');
+
+  let deferredPrompt = null;
+
+  // Detect iOS
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  // Detect if already installed (standalone mode)
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                    || window.navigator.standalone === true;
+
+  function showOverlay() {
+    if (!overlay) return;
+    overlay.classList.add('visible');
+  }
+
+  function hideOverlay() {
+    overlay.classList.remove('visible');
+    // Remember dismissal for 3 days
+    localStorage.setItem(DISMISSED_KEY, Date.now().toString());
+  }
+
+  function wasDismissedRecently() {
+    const ts = localStorage.getItem(DISMISSED_KEY);
+    if (!ts) return false;
+    return (Date.now() - parseInt(ts)) < 3 * 24 * 60 * 60 * 1000; // 3 jours
+  }
+
+  // Don't show if already installed or dismissed recently
+  if (isStandalone || wasDismissedRecently()) return;
+
+  // ── Android / Chrome : intercept native prompt ──
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Show after a short delay so user sees the page first
+    setTimeout(showOverlay, 1800);
+  });
+
+  // ── iOS Safari : show manual steps ──
+  if (isIOS && !isStandalone) {
+    btnLabel.textContent = 'Comment installer ?';
+    btnMain.querySelector('span:first-child').textContent = '📋';
+    iosSteps.classList.add('show');
+    setTimeout(showOverlay, 1800);
+  }
+
+  // Primary button click
+  btnMain.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      // Android: trigger native install
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      hideOverlay();
+    } else if (isIOS) {
+      // iOS: toggle steps visibility (already shown), just close
+      hideOverlay();
+    }
+  });
+
+  // Dismiss button
+  btnDismiss.addEventListener('click', hideOverlay);
+
+  // Click outside card to dismiss
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) hideOverlay();
+  });
+
+  // If user installs, hide the prompt
+  window.addEventListener('appinstalled', () => {
+    hideOverlay();
+    deferredPrompt = null;
+  });
+})();
 
 // ── Service Worker registration ──
 if ('serviceWorker' in navigator) {
