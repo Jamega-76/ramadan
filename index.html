@@ -4,10 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#0d2233" />
+  <meta name="description" content="Calendrier du Ramadan 2026 — une sourate expliquée chaque jour" />
+
+  <!-- PWA / Android -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- PWA / iOS Safari -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Ramadan 2026" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
   <title>Ramadan 2026</title>
-  <link rel="manifest" href="manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Lato:ital,wght@0,300;0,400;1,300&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -642,6 +653,115 @@
       line-height: 1.4;
     }
 
+    /* ── FULL SURAH SECTION ── */
+    .surah-full-wrap {
+      margin: 0 24px;
+      max-width: 560px;
+      width: calc(100% - 48px);
+      padding-bottom: 8px;
+    }
+
+    .surah-full-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .surah-full-header-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent);
+    }
+
+    .surah-full-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .surah-full-toggle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .surah-full-toggle.open {
+      background: rgba(201,168,76,0.15);
+      border-color: var(--gold);
+      transform: rotate(180deg);
+    }
+
+    .surah-full-body {
+      display: none;
+    }
+
+    .surah-full-body.open {
+      display: block;
+    }
+
+    .surah-verse-block {
+      margin-bottom: 20px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      border-left: 2px solid rgba(201,168,76,0.25);
+    }
+
+    .surah-verse-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .surah-verse-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      color: var(--teal-light);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .surah-verse-ar {
+      font-family: 'Amiri', serif;
+      font-size: 1.05rem;
+      color: var(--gold-pale);
+      direction: rtl;
+      text-align: right;
+      line-height: 2;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .surah-verse-fr {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .surah-note {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: rgba(15,107,107,0.15);
+      border-radius: 10px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.6;
+    }
+
     /* ── NAVIGATION BOTTOM ── */
     .detail-nav {
       display: flex;
@@ -1013,7 +1133,17 @@
     <button class="nav-btn" id="nextBtn" onclick="navigateDay(1)">Suivant →</button>
   </div>
 
-  <div style="height:40px"></div>
+  <!-- FULL SURAH TEXT -->
+  <div class="surah-full-wrap" id="surahFullWrap">
+    <div class="surah-full-header" onclick="toggleSurahFull()">
+      <div class="surah-full-title">Texte intégral de la sourate</div>
+      <div class="surah-full-header-line"></div>
+      <div class="surah-full-toggle" id="surahToggleBtn">▼</div>
+    </div>
+    <div class="surah-full-body" id="surahFullBody"></div>
+  </div>
+
+  <div style="height:48px"></div>
 </div>
 
 <script>
@@ -1612,6 +1742,15 @@ function showSunError(msg, allowRetry) {
 updateTodayCard();
 buildCalendar();
 initSunWidget();
+
+// ── Service Worker registration ──
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW error:', err));
+  });
+}
 </script>
 </body>
 </html>
